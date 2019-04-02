@@ -1,0 +1,1765 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <style>
+      
+        header {background-color: grey; padding: 15px; font-family: Arial; text-align: center; color: white; height: 250px;}
+      
+        body {position: relative;}
+
+        table {font-family: Arial; text-align: center; font-size: 18px; background-color: gray; float: left;}
+        th {background-color: gray; color: white;}
+        tr:nth-child(even) {background-color: white;}
+        tr:nth-child(odd) {background-color: lightgray;}
+        
+        ul {font-family: Arial;}
+
+        div {float: left; position: relative;}
+      
+        table#GOD {width: 100%; background-color: white; border: 1px solid white;}
+      
+        table#Abilities {width: 100%;}
+
+        div#Features-and-Traits {width 100%; background-color: grey; border: 1px solid red; font-family: Arial;}
+        dl#Features-and-Traits {width: 100%; background-color: white;}
+    
+        table#Skills {width: 100%; left: 0%; border: 1px solid purple;}
+      
+        .btn {border: none; color: white; padding: 14px 28px; font-size: 16px; cursor: pointer;}
+      
+        .lightgray {background-color: lightgray;}
+        .lightgray:hover {background-color: #AAAAAA;}
+        
+        .switch {position: relative; display: inline-block; width: 60px; height: 34px;}
+
+        .switch input {opacity: 0; width: 0; height: 0;}
+
+        .slider {position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; -webkit-transition: .4s; transition: .4s;}
+        .slider:before { position: absolute; content: ""; height: 26px; width: 26px; left: 4px; bottom: 4px; background-color: white; -webkit-transition: .4s; transition: .4s;}
+
+        input:checked + .slider { background-color: lightgray;}
+        input:focus + .slider {box-shadow: 0 0 1px lightgray;}
+        input:checked + .slider:before {-webkit-transform: translateX(26px); -ms-transform: translateX(26px); transform: translateX(26px);}
+
+        .slider.round {border-radius: 34px;}
+        .slider.round:before {border-radius: 50%;}
+      
+    </style>
+</head>
+<body>
+  
+    <header>
+        <h1 align=center style="color: white">Character Sheet</h1>
+        
+        <table>
+            <tr>
+                <colgroup><col span="3" width=33%></colgroup>
+                <th><button class="btn lightgrey" style="border-radius: 34px;" onclick="RollCharacter()">Go</button></th>
+            <th>
+            <table>
+            <tr>
+                <th>Point Buy Stats</th>
+                <th><label class="switch"><input type="checkbox" id="RollCheck"><span class="slider round"></span></label></th>
+                <th>Roll for Stats</th>
+            </tr>
+            </table>
+            </th>
+                
+            <th>
+            <table>
+            <tr>              
+                <th>Random Character</th>
+                <th><label class="switch"><input type="checkbox" id="SmartDumb"><span class="slider round"></span></label></th>
+                <th>Smart Character</th>
+            </tr>
+            </table>
+            </th>              
+              
+            </tr>
+        </table>
+      
+        <table  width=100% style="border: 1px solid white">
+                                                                                    <col width=35%>         <col width=20%>         <col width=20%>         <col width=5%>      <col width=20%>
+            <tr style="font-size: 20px">                                            <th>Name</th>           <th>Race</th>           <th>Class</th>          <th>Level</th>      <th>Background</th>         </tr>
+            <tr style="background-color: white; font-size: 20px; color: black">     <td id="Name"></td>     <td id="Race"></td>     <td id="Class"></td>    <td>1</td>          <td id="Background"></td>   </tr>
+        </table>
+      
+    </header>
+  
+    <div style="width: 100%">
+      <p> </p>
+    </div>
+ 
+<!-- <table id="GOD">
+    <col width=25%>
+    <col width=50%>
+    <col Width=25%>
+  
+  
+    <tr style="background-color: white;">
+    <td> -->
+    <figure width=20%>
+        <table id="Abilities">
+            <colgroup><col span="3" width=33%></colgroup>
+            <tr>    <th>Ability</th>    <th>Score</th>          <th>Modifier</th>       </tr>
+            <tr>    <td>STR</td>        <td id="STR"></td>      <td id="STRm"></td>     </tr>
+            <tr>    <td>DEX</td>        <td id="DEX"></td>      <td id="DEXm"></td>     </tr>
+            <tr>    <td>CON</td>        <td id="CON"></td>      <td id="CONm"></td>     </tr>
+            <tr>    <td>INT</td>        <td id="INT"></td>      <td id="INTm"></td>     </tr>
+            <tr>    <td>WIS</td>        <td id="WIS"></td>      <td id="WISm"></td>     </tr>
+            <tr>    <td>CHA</td>        <td id="CHA"></td>      <td id="CHAm"></td>     </tr>
+        </table>
+    </figure>
+<!--    </td> -->
+    
+<!--     <td>   -->
+        <div width="50%" style="background-color: white; border: 1px solid orange;">
+        <table>
+            <tr>    <th>Height</th>         <th>Weight</th>         </tr>
+            <tr>    <td id="Height"></td>   <td id="Weight"></td>   </tr>
+            <tr>    <th>Age</th>            <th>Sex</th>            </tr>
+            <tr>    <td id="Age"></td>      <td id="Sex"></td>      </tr>
+        </table>
+      
+        <table>
+            <tr>    <th>Max HP</th>         </tr>
+            <tr>    <td id="HP"></td>       </tr>
+            <tr>    <th>Hit Dice</th>       </tr>
+            <tr>    <td id="Hitdice"></td>  </tr>
+        </table>
+
+        <table>
+            <tr>    <th>AC</th>     <th>Initiative</th>     <th>Speed</th>          </tr>
+            <tr>    <td></td>       <td id="Init"></td>     <td id="Speed"></td>    </tr>
+        </table>
+      
+        </div>
+<!--    </td> -->
+  
+<!--     <td rowspan="2"> -->
+            <div id="Features-and-Traits">
+                <p style="font-family: Arial; font-size: 20px; color: white; background-color: grey; text-align: center"><b>Features and Traits</b></p>
+                <dl id="Features-and-Traits">
+                    <dt>Test</dt>
+                        <dd>- Filler</dd>
+                    <dt>Tea</dt>
+                        <dd>- Filler</dd>
+                    <dt>Milk</dt>
+                        <dd>- Filler</dd>
+                </dl>
+            </div>
+  
+            <div>
+                <p style="font-family: Arial; font-size: 20px; color: white; background-color: grey; text-align: center"><b>Languages</b></p>
+                <ul id="Languages">
+                    <li>Test</li>
+                    <li>Tea</li>
+                    <li>Milk</li>
+                </ul>
+            </div>
+<!--    </td>
+    </tr>
+
+    <tr>
+    <td> -->
+    <div>
+        <table id="Skills">
+                    <col width="15%">               <col width="55%">           <col width="15%">   <col width="15%">
+            <tr>    <th>P/E</th>                    <th colspan="2">Skill</th>                      <th>Mod</th>                        </tr>
+            <tr>    <td id=Acrobatics></td>         <td>Acrobatics</td>         <td>(DEX)</td>      <td id=AcrobaticsF></td>            </tr>
+            <tr>    <td id="Animal Handling"></td>  <td>Animal Handling</td>    <td>(WIS)</td>      <td id="Animal HandlingF"></td>     </tr>
+            <tr>    <td id=Arcana></td>             <td>Arcana</td>             <td>(INT)</td>      <td id=ArcanaF></td>                </tr>
+            <tr>    <td id=Athletics></td>          <td>Athletics</td>          <td>(STR)</td>      <td id=AthleticsF></td>             </tr>
+            <tr>    <td id=Deception></td>          <td>Deception</td>          <td>(CHA)</td>      <td id=DeceptionF></td>             </tr>
+            <tr>    <td id=History></td>            <td>History</td>            <td>(INT)</td>      <td id=HistoryF></td>               </tr>          
+            <tr>    <td id=Insight></td>            <td>Insight</td>            <td>(WIS)</td>      <td id=InsightF></td>               </tr>          
+            <tr>    <td id=Intimidation></td>       <td>Intimidation</td>       <td>(CHA)</td>      <td id=IntimidationF></td>          </tr>          
+            <tr>    <td id=Investigation></td>      <td>Investigation</td>      <td>(INT)</td>      <td id=InvestigationF></td>         </tr>          
+            <tr>    <td id=Medicine></td>           <td>Medicine</td>           <td>(WIS)</td>      <td id=MedicineF></td>              </tr>          
+            <tr>    <td id=Nature></td>             <td>Nature</td>             <td>(INT)</td>      <td id=NatureF></td>                </tr>          
+            <tr>    <td id=Perception></td>         <td>Perception</td>         <td>(WIS)</td>      <td id=PerceptionF></td>            </tr>    
+            <tr>    <td id=Performance></td>        <td>Performance</td>        <td>(CHA)</td>      <td id=PerformanceF></td>           </tr>
+            <tr>    <td id=Persuasion></td>         <td>Persuasion</td>         <td>(CHA)</td>      <td id=PersuasionF></td>            </tr>
+            <tr>    <td id=Religion></td>           <td>Religion</td>           <td>(INT)</td>      <td id=ReligionF></td>              </tr>
+            <tr>    <td id="Sleight of Hand"></td>  <td>Sleight of Hand</td>    <td>(DEX)</td>      <td id="Sleight of HandF"></td>     </tr>
+            <tr>    <td id="Stealth"></td>          <td>Stealth</td>            <td>(DEX)</td>      <td id="StealthF"></td>             </tr>
+            <tr>    <td id="Survival"></td>         <td>Survival</td>           <td>(WIS)</td>      <td id=SurvivalF></td>              </tr>
+            <tr>    <th colspan="4">P: Proficiency - E: Expertise</th>                                                                  </tr>
+        </table>
+    </div>
+    <div>
+        <table id="Ability Saving Throws">
+            <colgroup><col span="3" width=33%></colgroup>
+            <tr>    <th>Ability</th>    <th>Save</th>           </tr>
+            <tr>    <td>STR</td>        <td id="STRs"></td>     </tr>
+            <tr>    <td>DEX</td>        <td id="DEXs"></td>     </tr>
+            <tr>    <td>CON</td>        <td id="CONs"></td>     </tr>
+            <tr>    <td>INT</td>        <td id="INTs"></td>     </tr>
+            <tr>    <td>WIS</td>        <td id="WISs"></td>     </tr>
+            <tr>    <td>CHA</td>        <td id="CHAs"></td>     </tr>
+        </table>
+    </div>
+<!--     </td>
+    </tr>
+</table> -->
+    <script> function RollCharacter(){ try{
+      
+//REFERENCE INFORMATION
+        const Sexes = new Set(["Male", "Female"])
+        const Races = new Set(["Dwarf", "Elf", "Halfling", "Human", "Dragonborn", "Gnome", "Half-Elf", "Half-Orc", "Tiefling"])
+        const Subraces = new Map([
+            ["Dwarf", new Set(["Hill", "Mountain"])],
+            ["Elf", new Set(["High", "Wood", "Dark"])],
+            ["Halfling", new Set(["Lightfoot", "Stout"])],
+            ["Human", new Set([""])],
+            ["Dragonborn", new Set(["Black", "Blue", "Brass", "Bronze", "Copper", "Gold", "Green", "Red", "Silver", "White"])],
+            ["Gnome", new Set(["Forest", "Rock"])],
+            ["Half-Elf", new Set([""])],
+            ["Half-Orc", new Set([""])],
+            ["Tiefling", new Set([""])]
+        ])
+            
+            // Elemental Evil Player's Companion
+                //"Aarakocra": [""]
+                //"Genasi": ["Air", "Earth", "Fire", "Water"]
+                //"Gnome": ["Deep (Svirfneblin)"] DUPLICATE
+                //"Goliath": [""] DUPLICATE
+          
+          
+            //Sword Coast Adventurer's Guide
+                //"Dwarf": ["Grey (Duergar)"]
+                //"Halfling": ["Ghostwise"]
+                //"Gnome": ["Deep (Svirfneblin)"] DUPLICATE
+                // TIEFLING VARIANTS?
+            
+          
+            //Volo's Guide to Monsters
+                //"Aasimar": ["Protector", "Scourge", "Fallen"]
+                //"Firbolg": [""]
+                //"Goliath": [""] DUPLICATE
+                //"Kenku": [""]
+                //"Lizardfolk": [""]
+                //"Tabaxi": [""]
+                //"Triton": [""]
+                //"Bugbear": [""]
+                //"Goblin": [""]
+                //"Hobgoblin": [""]
+                //"Kobold": [""] URD?
+                //"Orc": [""]
+                //"Yuan-Ti Pureblood": [""]
+
+            // One Grung Above
+                //"Grung": [""]
+          
+            //The Tortle Package
+                //"Tortle": [""]
+
+//NAMES
+    
+    //DWARF NAMES
+        const DwarfNameMale = new Set(["Adrik", "Alberich", "Baern", "Barendd", "Beloril", "Brottor", "Dain", "Dalgal", "Darrak", "Delg", "Duergath", "Dworic",
+                                       "Eberk", "Einkil", "Elaim", "Erias", "Fallond", "Fargrim", "Gardain", "Gilthur", "Gimgen", "Gimurt", "Harbek", "Kildrak",
+                                       "Kilvar", "Morgran", "Morkral", "Nalral", "Nordak", "Nuraval", "Oloric", "Olunt", "Orsik", "Oskar", "Rangrim", "Reirak",
+                                       "Rurik", "Taklinn", "Thoradin", "Thorin", "Thradal", "Tordek", "Traubon", "Travok", "Ulfgar", "Uraim", "Veit", "Vonbin",
+                                       "Vondal", "Whurbin"])
+        
+        const DwarfNameFemale = new Set(["Anbera", "Artin", "Audhild", "Balifra", "Barbena", "Bardryn", "Bolhild", "Dagnal", "Dariff", "Delre", "Diesa", "Eldeth",
+                                        "Eridred", "Falkrunn", "Fallthra", "Finellen", "Gillydd", "Gunnloda", "Gurdis", "Helgret", "Helja", "Hlin", "Ilde", "Jarana",
+                                        "Kathra", "Kilia", "Kristryd", "Liftrasa", "Marastyr", "Mardred", "Morana", "Nalaed", "Nora", "Nurkara", "Oriff", "Ovina",
+                                        "Riswynn", "Sannl", "Therlin", "Thodris", "Torbera", "Tordrid", "Torgga", "Urshar", "Valida", "Vistra", "Vonana", "Werydd",
+                                        "Whudred", "Yurgunn"])
+        
+        const DwarfNameClan = new Set(["Aranore", "Balderk", "Battlehammer", "Bigtoe", "Bloodkith", "Bofdann", "Brawnanvil", "Brazzik", "Broodfist", "Burrowfound",
+                                       "Caebrek", "Daerdahk", "Dankil", "Daraln", "Deepdelver", "Durthane", "Eversharp", "Fallak", "Fireforge", "Foamtankard",
+                                       "Frostbeard", "Glanhig", "Goblinbane", "Goldfinder", "Gorunn", "Greybeard", "Hammerstone", "Helcral", "Holderhek", "Ironfist",
+                                       "Loderr", "Lutgehr", "Morigak", "Orcfoe", "Rakankrak", "Ruby-Eye", "Rumnaheim", "Silveraxe", "Silverstone", "Steelfist",
+                                       "Stoutale", "Strakeln", "Strongheart", "Thrahak", "Torevir", "Torunn", "Trollbleeder", "Trueanvil", "Trueblood", "Ungart"])
+        
+    //ELF NAMES
+        const ElfNameMale = new Set(["Adran", "Aelar", "Ardeth", "Ahvain", "Aramil", "Arannis", "Aust", "Azaki", "Beiro", "Berrian", "Caeldrim", "Carric", "Dayereth",
+                                     "Dreali", "Efferil", "Eiravel", "Enialis", "Erdan", "Erevan", "Fivin", "Galinndan", "Gennal", "Hadarai", "Halimath", "Heian",
+                                     "Himo", "Immeral", "Ivellios", "Korfel", "Lamlis", "Laucian", "Lucan", "Mindartis", "Naal", "Nutae", "Paelias", "Peren",
+                                     "Quarion", "Riardon", "Rolen", "Soveliss", "Suhnae", "Thamior", "Tharivol", "Theren", "Theriatis", "Thervan", "Uthemar",
+                                     "Vanuath", "Varis"])
+        
+        const ElfNameFemale = new Set(["Adrie", "Ahinar", "Althea", "Anastrianna", "Andraste", "Antinua", "Arara", "Baelitae", "Bethrynna", "Birel", "Caelynn", "Chaedi",
+                                       "Claira", "Dara", "Drusilia", "Elama", "Enna", "Faral", "Felosial", "Hatae", "Ielenia", "Ilanis", "Irann", "Jarsali", "Jelenneth",
+                                       "Keyleth", "Leshanna", "Lia", "Maiathah", "Malquis", "Meriele", "Mialee", "Myathethil", "Naivara", "Quelenna", "Quillathe",
+                                       "Ridaro", "Sariel", "Shanairla", "Shava", "Silaqui", "Sumnes", "Theirastra", "Thiala", "Tiaathque", "Traulam", "Vadania",
+                                       "Valanthe", "Valna", "Xanaphia"])
+        
+        const ElfNameChild = new Set(["Ael", "Ang", "Ara", "Ari", "Arn", "Aym", "Broe", "Bryn", "Cael", "Cy", "Dae", "Del", "Eli", "Eryn", "Faen", "Fera", "Gael", "Gar",
+                                      "Innil", "Jarsali", "Kan", "Koeth", "Lael", "Lue", "Mai", "Mara", "Mella", "Mya", "Naeris", "Naill", "Nim", "Phann", "Py", "Rael",
+                                      "Raer", "Ren", "Rinn", "Rua", "Sael", "Sai", "Sumi", "Syllin", "Ta", "Thia", "Tia", "Traki", "Vall", "Von", "Wil", "Za"])
+        
+        const ElfNameFamily = new Set(["Aloro", "Amakiir", "Amastacia", "Ariessus", "Arnuanna", "Berevan", "Caerdonel", "Caphaxath", "Casilltenirra", "Cithreth",
+                                       "Dalanthan", "Eathalena", "Erenaeth", "Ethanasath", "Fasharash", "Firahel", "Floshem", "Galanodel", "Goltorah", "Hanali",
+                                       "Holimion", "Horineth", "Iathrana", "Ilphelkiir", "Iranapha", "Koehlanna", "Lathalas", "Liadon", "Meliamne", "Mellerelel",
+                                       "Mystralath", "Naïlo", "Netyoive", "Ofandrus", "Ostoroth", "Othronus", "Qualanthri", "Raethran", "Rothenel", "Selevarun",
+                                       "Siannodel", "Suithrasas", "Sylvaranth", "Teinithra", "Tiltathana", "Wasanthi", "Withrethin", "Xiloscient", "Xistsrith",
+                                       "Yaeldrin"])
+        
+    //HALFLING NAMES
+        const HalflingNameMale = new Set(["Alton", "Ander", "Bernie", "Bobbin", "Cade", "Callus", "Corrin", "Dannad", "Danniel", "Eddie", "Egart", "Eldon", "Errich",
+                                          "Fildo", "Finnan", "Franklin", "Garret", "Garth", "Gilbert", "Gob", "Harol", "Igor", "Jasper", "Keith", "Kevin", "Lazam", "Lerry",
+                                          "Lindal", "Lyle", "Merric", "Mican", "Milo", "Morrin", "Nebin", "Nevil", "Osborn", "Ostran", "Oswalt", "Perrin", "Poppy", "Reed",
+                                          "Roscoe", "Sam", "Shardon", "Tye", "Ulmo", "Wellby", "Wendel", "Wenner", "Wes"])
+        
+        const HalflingNameFemale = new Set(["Alain", "Andry", "Anne", "Bella", "Blossom", "Bree", "Callie", "Chenna", "Cora", "Dee", "Dell", "Eida", "Eran", "Euphemia",
+                                            "Georgina", "Gynnie", "Harriet", "Jasmine", "Jillian", "Jo", "Kithri", "Lavinia", "Lidda", "Maegan", "Marigold", "Merla",
+                                            "Myria", "Nedda", "Nikki", "Nora", "Olivia", "Paela", "Pearl", "Pennie", "Philomena", "Portia", "Robbie", "Rose", "Saral",
+                                            "Seraphina", "Shaena", "Stacee", "Tawna", "Thea", "Trym", "Tyna", "Vani", "Verna", "Wella", "Willow"])
+        
+        const HalflingNameFamily = new Set(["Appleblossom", "Bigheart", "Brightmoon", "Brushgather", "Cherrycheeks", "Copperkettle", "Deephollow", "Elderberry", "Fastfoot",
+                                            "Fatrabbit", "Glenfellow", "Goldfound", "Goodbarrel", "Goodearth", "Greenbottle", "Greenleaf", "High-Hill", "Hilltopple",
+                                            "Hogcollar", "Honeypot", "Jamjar", "Kettlewhistle", "Leagallow", "Littlefoot", "Nimblefingers", "Porridgepot", "Quickstep",
+                                            "Reedfellow", "Shadowquick", "Silvereyes", "Smoothhands", "Stonebridge", "Stoutbridge", "Stoutman", "Strongbones", "Sunmeadow",
+                                            "Swiftwhistle", "Tallfellow", "Tealeaf", "Tenpenny", "Thistletop", "Thorngage", "Tosscobble", "Underbough", "Underfoot",
+                                            "Warmwater", "Whispermouse", "Wildcloak", "Wildheart", "Wiseacre"])
+        
+    //HUMAN NAMES
+        const HumanNameMale = new Set(["Aseir", "Bardeid", "Haseid", "Khemed", "Mehmen", "Sudeiman", "Zasheir", "Darvin", "Dorn", "Evendur", "Gorstag", "Grim", "Helm",
+                                       "Malark", "Morn", "Randal", "Stedd", "Ander", "Blath", "Bran", "Frath", "Geth", "Lander", "Luth", "Malcer", "Stor", "Taman",
+                                       "Urth", "Aoth", "Bareris", "Ephut-Ki", "Kethoth", "Mumed", "Ramas", "So-Kehur", "Thazar-De", "Urhur", "Borivik", "Faurgar",
+                                       "Jandar", "Kanithar", "Madislak", "Ralmevik", "Shaumar", "Vladislak", "An", "Chen", "Chi", "Fai", "Jiang", "Jun", "Lian",
+                                       "Long", "Meng", "On", "Shan", "Shui", "Wen", "Anton", "Diero", "Marcon", "Pieron", "Rimardo", "Romero", "Slazar", "Umbero"])
+        
+        const HumanNameFemale = new Set(["Atala", "Ceidil", "Hama", "Jasmal", "Meilil", "Seipora", "Yasheira", "Zasheida", "Arveene", "Esvele", "Jhessail", "Kerri",
+                                         "Lureene", "Miri", "Rowan", "Shandri", "Tessele", "Amafrey", "Betha", "Cefrey", "Kethra", "Mara", "Olga", "Silifrey", "Westra",
+                                         "Arizima", "Chathi", "Nephis", "Nulara", "Murithi", "Sefris", "Thola", "Umara", "Zolis", "Fyevarra", "Hulmarra", "Immith", "Imzel",
+                                         "Navarra", "Shevarra", "Tammith", "Yuldra", "Bai", "Chao", "Jia", "Lei", "Meilil", "Qiao", "Shui", "Tai", "Balama", "Dona", "Faila",
+                                         "Jalana", "Luisa", "Marta", "Quara", "Selise", "Vonda"])
+        
+        const HumanNameFamily = new Set(["Basha", "Dumein", "Jassan", "Khalid", "Mostana", "Pashar", "Rein", "Amblecrown", "Buckman", "Dundragon", "Evenwood", "Greycastle",
+                                         "Tallstag", "Brightwood", "Helder", "Hornraven", "Lackman", "Stormwind", "Windrivver", "Ankhalab", "Anskuld", "Fezim", "Hahpet",
+                                         "Nathandem", "Sepret", "Uuthrakt", "Chergoba", "Dyernina", "Iltazyara", "Murnyethara", "Stayanoga", "Ulmokina", "Chien", "Huang",
+                                         "Kao", "Kung", "Lao", "Ling", "Mei", "Pin", "Shin", "Sum", "Tan", "Wan", "Agosto", "Astorio", "Calabra", "Domine", "Falone",
+                                         "Marivaldi", "Pisacar", "Ramondo"])
+        
+    //DRAGONBORN NAMES
+        const DragonbornNameMale = new Set(["Adrex", "Arjhan", "Azzakh", "Balasar", "Baradad", "Bharash", "Bidreked", "Dadalan", "Dazzazn", "Direcris", "Donaar", "Fax",
+                                            "Gargax", "Ghesh", "Gorbundus", "Greethen", "Heskan", "Hirrathak", "Ildrex", "Kaladan", "Kerkad", "Kiirith", "Kriv", "Maagog",
+                                            "Medrash", "Mehen", "Mozikth", "Mreksh", "Mugrunden", "Nadarr", "Nithther", "Norkuuth", "Nykkan", "Pandjed", "Patrin", "Pijjirik",
+                                            "Quarethon", "Rathkran", "Rhogar", "Rivaan", "Sethrekar", "Shamash", "Shedinn", "Srorthen", "Tarhun", "Torinn", "Trynnicus",
+                                            "Valorean", "Vrondiss", "Zedaar"])
+        
+        const DragonbornNameFemale = new Set(["Akra", "Aasathra", "Antara", "Arava", "Biri", "Blendaeth", "Burana", "Chassath", "Daar", "Dentratha", "Doudra", "Driindar",
+                                              "Eggren", "Farideh", "Findex", "Furrele", "Gesrethe", "Gilkass", "Harann", "Havilar", "Hethress", "Hillanot", "Jaxi", "Jezean",
+                                              "Jheri", "Kadana", "Kava", "Korinn", "Megren", "Mijira", "Mishann", "Nala", "Nuthra", "Perra", "Pogranix", "Pyxrin", "Quespa",
+                                              "Raiann", "Rezena", "Ruloth", "Saphara", "Savaran", "Sora", "Surina", "Synthrin", "Tatyan", "Thava", "Uadjit", "Vezera", "Zykroff"])
+        
+        const DragonbornNameClan = new Set(["Akambherylliax", "Argenthrixus", "Baharoosh", "Beryntolthropal", "Bhenkumbryrznaax", "Caavylteradyn", "Chumbyxirinnish",
+                                            "Clethtinthiallor", "Daardedrian", "Delmirev", "Dhyrktelonis", "Ebynichtomonis", "Esstyrlynn", "Fharngnarthnost", "Ghaallixirn",
+                                            "Grrrmmballhyst", "Gygazzylyshrift", "Hashphronyxadyn", "Hshhsstoroth", "Imbixtellrhyst", "Jerynomonis", "Jharthraxyn", "Kerrhylon",
+                                            "Kimbatuul", "Lhamboldennish", "Linxakasendalor", "Mohradyllion", "Mystan", "Nemmonis", "Norixius", "Ophinshtalajiir", "Orexijandilin",
+                                            "Pfaphnyrennish", "Phrahdrandon", "Pyraxtallinost", "Qyxpahrgh", "Raghthroknaar", "Shestendeliath", "Skaarzborroosh", "Sumnarghthrysh",
+                                            "Tiammanthyllish", "Turnuroth", "Umbyrphrael", "Vangdondalor", "Verthisathurgiesh", "Wivvyrholdalphiax", "Wystongjiir", "Xephyrbahnor",
+                                            "Yarjerit", "Zzzxaaxthroth"])
+        
+    //GNOME NAMES
+        const GnomeNameMale = new Set(["Alston", "Alvyn", "Anverth", "Arumawann", "Bilbron", "Bodynock", "Brocc", "Burgell", "Cockaby", "Crampernap", "Dabbledob", "Delebean",
+                                       "Dimble", "Eberdeb", "Eldon", "Erky", "Fablen", "Fibblestib", "Fonkin", "Frouse", "Frug", "Gerbo", "Gimble", "Glim", "Igden", "Jabble",
+                                       "Jebeddo", "Kellen", "Kipper", "Namfoodle", "Oppleby", "Orryn", "Paggen", "Pallabar", "Pog", "Qualen", "Ribbles", "Rimple", "Roondar",
+                                       "Sapply", "Seebo", "Senteq", "Sindri", "Umpen", "Warryn", "Wiggens", "Wobbles", "Wrenn", "Zaffrab", "Zook"])
+        
+        const GnomeNameFemale = new Set(["Abalaba", "Bimpnottin", "Breena", "Buvvie", "Callybon", "Caramip", "Carlin", "Cumpen", "Dalaba", "Donella", "Duvamil", "Ella",
+                                         "Ellyjoybell", "Ellywick", "Enidda", "Lilli", "Loopmottin", "Lorilla", "Luthra", "Mardnab", "Meena", "Menny", "Mumpena", "Nissa",
+                                         "Numba", "Nyx", "Oda", "Oppah", "Orla", "Panana", "Pyntle", "Quilla", "Ranala", "Reddlepop", "Roywyn", "Salanop", "Shamil", "Siffress",
+                                         "Symma", "Tana", "Tenena", "Tervaround", "Tippletoe", "Ulla", "Unvera", "Veloptima", "Virra", "Waywocket", "Yebe", "Zanna"])
+        
+        const GnomeNameClan = new Set(["Albaratie", "Bafflestone", "Beren", "Boondiggles", "Cobblelob", "Daergel", "Dunben", "Fabblestabble", "Fapplestamp", "Fiddlefen",
+                                       "Folkor", "Garrick", "Gimlen", "Glittergem", "Gobblefirn", "Gummen", "Horcusporcus", "Humplebumple", "Ironhide", "Leffery", "Lingenhall",
+                                       "Loofollue", "Maekkelferce", "Miggledy", "Munggen", "Murning", "Musgraben", "Nackle", "Ningrel", "Nopenstallen", "Nucklestamp", "Offund",
+                                       "Oomtrowl", "Pilwicken", "Pingun", "Quillsharpener", "Raulnor", "Reese", "Rofferton", "Scheppen", "Shadowcloak", "Silverthread", "Sympony",
+                                       "Tarkelby", "Timbers", "Turen", "Umbodben", "Waggletop", "Welber", "Wildwander"])
+                
+    //HALF-ORC NAMES
+        const HalfOrcNameMale = new Set(["Argran", "Braak", "Brug", "Cagak", "Dench", "Dorn", "Dren", "Druuk", "Feng", "Gell", "Gnarsh", "Grumbar", "Gubrash", "Hagren", "Henk",
+                                          "Hogar", "Holg", "Imsh", "Karash", "Karg", "Keth", "Korag", "Krusk", "Lubash", "Megged", "Mhurren", "Mord", "Morg", "Nil", "Nybarg",
+                                          "Odorr", "Ohr", "Rendar", "Resh", "Ront", "Rrath", "Sark", "Scrag", "Sheggen", "Shump", "Tanglar", "Tarak", "Thar", "Thokk", "Trag",
+                                          "Ugarth", "Varg", "Vilberg", "Yurk", "Zed"])
+        
+        const HalfOrcNameFemale = new Set(["Arha", "Baggi", "Bendoo", "Bilga", "Brakka", "Creega", "Drenna", "Ekk", "Emen", "Engong", "Fistula", "Gaaki", "Gorga", "Grai",
+                                            "Greeba", "Grigi", "Gynk", "Hrathy", "Huru", "Ilga", "Kabbarg", "Kansif", "Lagazi", "Lezre", "Murgen", "Murook", "Myev", "Nagrette",
+                                            "Neega", "Nella", "Nogu", "Oolah", "Ootah", "Ovak", "Ownka", "Puyet", "Reeza", "Shautha", "Silgre", "Sutha", "Tagga", "Tawar", "Tomph",
+                                            "Ubada", "Vanchu", "Vola", "Volen", "Vorka", "Yevelda", "Zagga"])
+                
+    //TIEFLING NAMES
+        const TieflingNameMale = new Set(["Abad", "Ahrim", "Akmen", "Amnon", "Andram", "Astaro", "Balam", "Barakas", "Bathin", "Caim", "Chem", "Cimer", "Cressel", "Damakos",
+                                          "Ekemon", "Euron", "Fenriz", "Forcas", "Habor", "Iados", "Kairon", "Leucis", "Mamnen", "Mantus", "Marbas", "Melech", "Merihim", "Modean",
+                                          "Mordai", "Moromo", "Morthos", "Nicor", "Nirgel", "Oriax", "Paymon", "Pelaios", "Purson", "Qemuel", "Raam", "Rimmon", "Sammal", "Skamos",
+                                          "Tethren", "Thamuz", "Therai", "Valafar", "Vassago", "Xappan", "Zepar", "Zephan"])
+        
+        const TieflingNameFemale = new Set(["Akta", "Anakis", "Armara", "Astaro", "Aym", "Azza", "Beleth", "Bryseis", "Bune", "Criella", "Damaia", "Decarabia", "Ea", "Gadreel",
+                                            "Gomory", "Hecat", "Ishte", "Jezebeth", "Kali", "Kallista", "Kasdeya", "Lerissa", "Lilith", "Makaria", "Manea", "Markosian", "Mastema",
+                                            "Naamah", "Nemeia", "Nija", "Orianna", "Osah", "Phelaia", "Prosperine", "Purah", "Pyra", "Rieta", "Ronobe", "Ronwe", "Seddit", "Seere",
+                                            "Sekhmet", "Semyaza", "Shava", "Shax", "Sorath", "Uzza", "Vapula", "Vepar", "Verin"])
+        
+        const TieflingNameVirtue = new Set(["Ambition", "Art", "Carrion", "Chant", "Creed", "Death", "Debauchery", "Despair", "Doom", "Doubt", "Dread", "Ecstasy", "Ennui",
+                                            "Entropy", "Excellence", "Fear", "Glory", "Gluttony", "Grief", "Hate", "Hope", "Horror", "Ideal", "Ignominy", "Laughter", "Love",
+                                            "Lust", "Mayhem", "Mockery", "Murder", "Muse", "Music", "Mystery", "Nowhere", "Open", "Pain", "Passion", "Poetry", "Quest", "Random",
+                                            "Reverence", "Revulsion", "Sorrow", "Temerity", "Torment", "Tragedy", "Vice", "Virtue", "Weary", "Wit"])
+        
+        const Names = new Map([ ["Dwarf",       new Map([["Male", DwarfNameMale],
+                                                         ["Female", DwarfNameFemale],
+                                                         ["Family", DwarfNameClan],
+                                                         ["Alt", new Set()]
+                                                        ])],
+                                ["Elf",         new Map([["Male", ElfNameMale],
+                                                        ["Female", ElfNameFemale],
+                                                         ["Family", ElfNameFamily],
+                                                         ["Alt", ElfNameChild]
+                                                        ])],
+                                ["Halfling",    new Map([["Male", HalflingNameMale],
+                                                         ["Female", HalflingNameFemale],
+                                                         ["Family", HalflingNameFamily],
+                                                         ["Alt", new Set()]
+                                                        ])],
+                                ["Human",       new Map([["Male", HumanNameMale],
+                                                         ["Female", HumanNameFemale],
+                                                         ["Family", HumanNameFamily],
+                                                         ["Alt", new Set()]
+                                                        ])],
+                                ["Dragonborn",  new Map([["Male", DragonbornNameMale],
+                                                         ["Female", DragonbornNameFemale],
+                                                         ["Family", DragonbornNameClan],
+                                                         ["Alt", new Set()]         //nicknames
+                                                        ])],
+                                ["Gnome",       new Map([["Male", GnomeNameMale],
+                                                         ["Female", GnomeNameFemale],
+                                                         ["Family", GnomeNameClan],
+                                                         ["Alt", new Set()]         //nicknames
+                                                        ])],
+                                ["Half-Orc",    new Map([["Male", HalfOrcNameMale],
+                                                         ["Female", HalfOrcNameFemale],
+                                                         ["Family", new Set()],
+                                                         ["Alt", new Set()]
+                                                        ])],
+                                ["Tiefling",    new Map([["Male", TieflingNameMale],
+                                                         ["Female", TieflingNameFemale],
+                                                         ["Family", new Set()],
+                                                         ["Alt", TieflingNameVirtue]
+                                                        ])]
+                            ])        
+    //SPELLS
+        BardCantrips = new Set          (["Blade Ward", "Dancing Lights", "Friends", "Light", "Mage Hand", "Mending", "Message", "Minor Illusion", "Prestidigitation", "True Strike", "Vicious Mockery"])
+        BardLevelOne = new Set          (["Animal Friendship", "Bane", "Charm Person", "Comprehend Languages", "Cure Wounds ", "Detect Magic", "Disguise Self", "Dissonant Whispers", "Faerie Fire ",
+                                        "Feather Fall", "Healing Word", "Heroism", "Identify", "Illusory Script", "Longstrider", "Silent Image", "Sleep ", "Speak with Animals", "Tasha's Hideous Laughter",
+                                        "Thunderwave", "Unseen Servant"])
+        
+        ClericCantrips = new Set        (["Guidance", "Light", "Mending", "Resistance", "Sacred Flame", "Spare the Dying ", "Thaumaturgy"])
+        ClericLevelOne = new Set        (["Bane", "Bless", "Command", "Create or Destroy Water", "Cure Wounds", "Detect Evil and Good", "Detect Magic", "Detect Poison and Disease", "Guiding Bolt",
+                                        "Healing Word", "Inflict Wounds", "Protection from  Evil and Good", "Purify Food and Drink", "Sanctuary", "Shield of Faith"])
+        KnowledgeLevelOne = new Set     (["Command", "Identify"])
+        LifeLevelOne = new Set          (["Bless", "Cure Wounds"])
+        LightLevelOne = new Set         (["Burning Hands", "Faerie Fire"])
+        NatureLevelOne = new Set        (["Animal Friendship", "Speak with Animals"])
+        TempestLevelOne = new Set       (["Fog Cloud", "Thunderwave"])
+        TrickeryLevelOne = new Set      (["Charm Person", "Disguise Self"])
+        WarLevelOne = new Set           (["Divine Favor", "Spiritual Weapon"])
+        
+        DruidCantrips = new Set         (["Druidcraft", "Guidance", "Mending", "Poison Spray", "Produce Flame", "Resistance", "Shillelagh", "Thorn Whip"])
+        DruidLevelOne = new Set         (["Animal Friendship", "Charm Person", "Create or Destroy Water", "Cure Wounds", "Detect Magic", "Detect Poison and Disease", "Entangle", "Faerie Fire",
+                                        "Fog Cloud", "Goodberry", "Healing Word", "Jump", "Longstrider", "Purify Food and Drink", "Speak with Animals", "Thunderwave"])
+        
+        SorcererCantrips = new Set      (["Acid Splash", "Blade Ward", "Chill Touch", "Dancing Lights", "Fire Bolt", "Friends", "Light", "Mage Hand", "Mending", "Message", "Minor Illusion",
+                                        "Poison Spray", "Prestidigitation", "Ray of Frost", "Shocking Grasp", "True Strike"])
+        SorcererLevelOne = new Set      (["Burning Hands", "Charm Person", "Chromatic Orb", "Color Spray", "Comprehend Languages", "Detect Magic", "Disguise Self", "Expeditious Retreat", "False Life",
+                                        "Feather Fall", "Fog Cloud", "Jump", "Mage Armor", "Magic Missile", "Ray of Sickness", "Shield", "Silent Image", "Sleep", "Thunderwave", "Witch Bolt"])
+        
+        WarlockCantrips = new Set       (["Blade Ward", "Chill Touch", "Eldritch Blast", "Friends", "Mage Hand", "Minor Illusion", "Poison Spray", "Prestidigitation", "True Strike"])
+        WarlockLevelOne = new Set       (["Armor of Agathys", "Arms of Hadar", "Charm Person", "Comprehend Languages", "Expeditious Retreat", "Hellish Rebuke", "Hex", "Illusory Script",
+                                        "Protection from Evil and Good", "Unseen Servant", "Witch Bolt"])
+        
+        WizardCantrips = new Set        (["Acid Splash", "Blade Ward", "Chill Touch", "Dancing Lights", "Fire Bolt", "Friends", "Light", "Mage Hand", "Mending", "Message", "Minor Illusion",
+                                        "Poison Spray", "Prestidigitation", "Ray of Frost", "Shocking Grasp", "True Strike"])
+        WizardLevelOne = new Set        (["Alarm", "Burning Hands", "Charm Person", "Chromatic Orb", "Color Spray", "Comprehend Languages", "Detect Magic", "Disguise Self", "Expeditious Retreat",
+                                        "False Life", "Feather Fall", "Find Familiar", "Fog Cloud", "Grease", "Identify", "Illusory Script", "Jump", "Longstrider", "Mage Armor", "Magic Missile",
+                                        "Protection from Evil and Good", "Ray of Sickness", "Shield", "Silent Image", "Sleep", "Tasha's Hideous Laughter", "Tenser's Floating Disk", "Thunderwave",
+                                        "Unseen Servant", "Witch Bolt"])
+        
+
+    //EQUIPMENT
+    //Weapons, artisan tools, instruments, and gaming sets are below as Maps to track proficiencies
+        const ArmorLight = new Set          (["Padded Armor", "Leather Armor", "Studded Leather Armor"])
+
+        const ArmorMedium = new Set         (["Hide Armor", "Chain Shirt", "Scale Mail", "Breastplate", "Half Plate"])
+
+        const ArmorHeavy = new Set          (["Ring Mail", "Chain Mail", "Splint Armor", "Full Plate"])
+
+        const ArmorShield = new Set         (["Shield"])
+
+        const FocusDruidic = new Set        (["Sprig Of Mistletoe", "Totem", "Wooden Staff", "Yew Wand"])
+
+        const FocusArcane = new Set         (["Crystal", "Orb", "Rod", "Staff", "Wand"])
+
+        const FocusHolySymbol = new Set     (["Amulet", "Emblem", "Reliquary"])
+
+        const StuffReal = new Set           (["Abacus", "Acid (Vial)", "Alchemist's Fire (Flask)", "Arrows (20)","Blowgun Needles (50)",
+                                            "Crossbow Bolts (20)", "Sling Bullets (20)", "Antitoxin (Vial)", "Backpack",
+                                            "Ball Bearings (Bag Of 1000)", "Barrel", "Basket", "Bedroll", "Bell", "Blanket",
+                                            "Block And Tackle", "Book", "Bottle, Glass", "Bucket", "Caltrops (Bag Of 20)",
+                                            "Candle", "Case, Crossbow Bolt", "Case, Map Or Scroll", "Chain (10 Feet)",
+                                            "Chalk (1 Piece)", "Chest", "Climber's Kit", "Clothes, Common", "Clothes, Costume",
+                                            "Clothes, Fine", "Clothes, Traveler", "Component Pouch", "Crowbar", "Fishing Tackle",
+                                            "Flask", "Tankard", "Grappling Hook", "Hammer", "Hammer, Sledge", "Healer's Kit",
+                                            "Holy Water (Flask)", "Hourglass", "Hunting Trap", "Ink (1 Ounce Bottle)", "Ink Pen",
+                                            "Jug", "Pitcher", "Ladder (10-Foot)", "Lamp", "Lantern, Bullseye",
+                                            "Lantern, Hooded", "Lock", "Magnifying Glass", "Manacles", "Mess Kit", "Mirror, Steel",
+                                            "Oil (Flask)", "Paper (1 Sheet)","Parchment (1 Sheet)", "Perfume (Vial)",
+                                            "Pick, Miner's", "Piton", "Poison, Basic (Vial)", "Pole (10-Foot)", "Pot, Iron",
+                                            "Potion Of Healing", "Pouch", "Quiver", "Ram, Portable", "Rations (1 Day)", "Robes",
+                                            "Rope, Hempen (50 Feet)", "Rope, Silk (50 Feet)", "Sack", "Scale, Merchant's",
+                                            "Sealing Wax", "Shovel", "Signal Whistle", "Signet Ring", "Soap", "Spellbook",
+                                            "Spikes, Iron (10)", "Spyglass", "Tent, Two-Person", "Tinderbox", "Torch", "Vial",
+                                            "Waterskin (Full)", "Whetstone"])
+
+        const StuffFake = new Set           (["Book, Prayer", "Incense, Stick", "Bottle Of Colored Liquid", "Weighted Dice",
+                                            "Marked Cards", "Fake Duke's Signet Ring", "String (10 Feet)", "Alms Box", "Incense, Block",
+                                            "Censer", "Vestments", "Little Bag Of Sand", "Knife, Small", "Book, Lore", "Love Letter",
+                                            "Lock Of Hair", "Trinket", "Guild Letter Of Introduction", "Purse", "Scroll Of Pedigree",
+                                            "Trophy, Animal", "Trophy, Enemy", "Letter From A Dead Colleague Posing A Question You Have Not Yet Been Able To Answer",
+                                            "Insignia Of Rank", "Map, Home City", "Pet, Mouse"])
+
+        const Classes = new Set             (["Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin",  "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard"])
+        
+        const Backgrounds = new Set         (["Acolyte", "Charlatan", "Criminal", "Entertainer", "Folk Hero", "Guild Artisan", "Hermit", "Noble", "Outlander",
+                                            "Sage", "Sailor", "Soldier", "Urchin"])
+        
+        const Skill2Ability = new Map       ([["Acrobatics","DEX"], ["Animal Handling","WIS"], ["Arcana","INT"], ["Athletics","STR"], ["Deception","CHA"], ["History","INT"],
+                                            ["Insight","WIS"], ["Intimidation","CHA"], ["Investigation","INT"], ["Medicine","WIS"], ["Nature","INT"], ["Perception","WIS"],
+                                            ["Performance","CHA"], ["Persuasion","CHA"], ["Religion","INT"], ["Sleight of Hand","DEX"], ["Stealth","DEX"], ["Survival","WIS"]])
+        
+        const StandardLanguages = new Set   (["Dwarvish", "Elvish", "Giant", "Gnomish", "Goblin", "Halfling", "Orc"])
+        
+        const ExoticLanguages = new Set     (["Abyssal", "Celestial", "Draconic", "Deep Speech", "Infernal", "Primordial", "Sylvan", "Undercommon"])
+        
+
+    //CHARACTER INFO
+        var Name
+        var Age
+        var Sex
+        var Race
+        var Subrace
+        var SubraceAltText = ""
+        var Class
+        var Subclass = ""
+        var Background
+        var AbilityScores = new Map ([["STR",0], ["DEX",0], ["CON",0], ["INT",0], ["WIS",0], ["CHA",0]])
+        
+        var AbilityMods = new Map   ([["STR",0], ["DEX",0], ["CON",0], ["INT",0], ["WIS",0], ["CHA",0]])
+        
+        var SavingThrows = new Map  ([["STR",0], ["DEX",0], ["CON",0], ["INT",0], ["WIS",0], ["CHA",0]])
+        
+        var Skills = new Map        ([["Acrobatics",0], ["Animal Handling",0], ["Arcana",0], ["Athletics",0], ["Deception",0], ["History",0],
+                                    ["Insight",0], ["Intimidation",0], ["Investigation",0], ["Medicine",0], ["Nature",0], ["Perception",0],
+                                    ["Performance",0], ["Persuasion",0], ["Religion",0], ["Sleight of Hand",0], ["Stealth",0], ["Survival",0]])
+        
+        var Resistances = new Map   ([["Acid",0], ["Bludgeoning",0], ["Cold",0], ["Fire",0], ["Force",0], ["Lightning",0], ["Necrotic",0],
+                                    ["Piercing",0], ["Poison",0], ["Psychic",0], ["Radiant",0], ["Slashing",0], ["Thunder",0]])
+        
+        var ArmorProfs = new Map    ([["Light",0], ["Medium",0], ["Heavy",0], ["Shield",0]])
+        
+        var SimpleMelee = new Map   ([["Club",0], ["Dagger",0], ["Greatclub",0], ["Handaxe",0], ["Javelin",0], ["Light Hammer",0], ["Mace",0],
+                                    ["Quarterstaff",0], ["Sickle",0], ["Spear",0]])
+        
+        var SimpleRanged = new Map  ([["Light Crossbow",0], ["Dart",0], ["Shortbow",0], ["Sling",0]])
+        
+        var MartialMelee = new Map  ([["Battleaxe",0], ["Flail",0], ["Glaive",0], ["Greataxe",0], ["Greatsword",0], ["Halberd",0], ["Lance",0], ["Longsword",0], ["Maul",0],
+                                    ["Morningstar",0], ["Pike",0], ["Rapier",0], ["Scimitar",0], ["Shortsword",0], ["Trident",0], ["War Pick",0], ["Warhammer",0], ["Whip",0]])
+        
+        var MartialRanged = new Map ([["Blowgun",0], ["Hand Crossbow",0], ["Heavy Crossbow",0], ["Longbow",0], ["Net",0]])
+        
+        var ArtisanTools = new Map  ([["Alchemist's Supplies",0], ["Brewer's Supplies",0], ["Calligrapher's Supplies",0], ["Carpenter's Tools",0],
+                                    ["Cartographer's Tools",0], ["Cobbler's Tools",0], ["Cook's Utensils",0], ["Glassblower's Tools",0], ["Jeweler's Tools",0],
+                                    ["Leatherworker's Tools",0], ["Mason's Tools",0], ["Painter's Supplies",0], ["Potter's Tools",0], ["Smith's Tools",0],
+                                    ["Tinker's Tools",0], ["Weaver's Tools",0], ["Woodcarver's Tools",0]])
+        
+        var GamingSets = new Map    ([["Dice Set",0], ["Dragonchess Set",0], ["Playing Card Set",0], ["Three-Dragon Ante Set",0]])
+        
+        var Instruments = new Map   ([["Bagpipes",0], ["Drum",0], ["Dulcimer",0], ["Flute",0], ["Lute",0], ["Lyre",0], ["Horn",0], ["Pan Flute",0], ["Shawm",0], ["Viol",0]])
+        
+        var OtherTools = new Map    ([["Navigator's Tools",0], ["Poisoner's Kit",0], ["Thieves' Tools",0], ["Herbalism Kit",0], ["Disguise Kit",0], ["Forgery Kit",0]])
+        
+        var Vehicles = new Map      ([["Land",0], ["Water",0]])
+
+        const AllItems = new Set([  ...ArmorLight, ...ArmorMedium, ...ArmorHeavy, ...ArmorShield, ...FocusDruidic, ...FocusArcane, ...FocusHolySymbol, ...StuffReal, ...StuffFake,
+                                    ...SimpleMelee.keys(), ...SimpleRanged.keys(), ...MartialMelee.keys(), ...MartialRanged.keys(), ...ArtisanTools.keys(), ...GamingSets.keys(),
+                                    ...Instruments.keys(), ...OtherTools.keys(), ...Vehicles.keys()
+                                ])
+
+        var Equipment = new Map()
+        var GP = 0
+        
+        var Traits = new Set()
+        var Actives = new Set()
+        var SpecialSkills = new Set()
+        var SpecialSavingThrows = new Set()
+        var BackgroundFeatures = new Set()
+        var KnownLanguages = new Set(["Common"])
+        var Speed = 25
+        var Size = "Medium"
+        var Height
+        var Weight
+        var HP = 0
+        var Hitdice
+
+
+    //HELPER FUNCTIONS
+        function setdif(setA, setB){
+            let dif = new Set(setA)
+            for (let x of setB) {
+                dif.delete(x);
+            }
+            return dif;
+        }
+        function setunion(setA, setB){
+            let union = new Set(setA)
+            for (let x of setB){
+                union.add(x)
+            }
+            return union
+        }
+        function shuffle(a) {
+            //Fisher-Yates
+            a = a.slice()
+            for (let i=a.length-1; i>0; i--) {
+                const j = Math.floor(Math.random() * (i+1))
+                let temp = a[i]
+                a[i] = a[j]
+                a[j] = temp
+            }
+            return a
+        }
+        function ROLL(die_count, die_type) {
+            let sum = 0
+            for (let i=0; i<die_count; i++) {
+                sum += Math.floor(Math.random() * die_type + 1)
+            }
+            return sum
+        }
+        function CHOOSE(choice_pool, number_items, exceptions){
+            //Returns *number_items* random items from *choice_pool* as a Set. Samples uniformly without replacement.
+            //*choice_pool* can be an Array, Set, or Map.
+            //*exceptions* can be an Array or Set.
+            //If *number_items* == 1 (or undefined), returns the item itself instead of a singleton Set.
+            if (number_items === undefined){
+                //*number_items* is optional
+                var number_items = 1
+            }
+            if (exceptions === undefined){
+                //*exceptions* is optional
+                var exceptions = []
+            }
+            //If *exceptions* is an Array, turn it into a Set.
+            exceptions = new Set(exceptions)
+            //If *choice_pool* is a Map, turn it into an Array.
+            if (choice_pool instanceof Map){
+                choice_pool = [...choice_pool.keys()]
+            }
+            //Remove exceptions from the choice pool and make sure *choice_pool* is an Array.
+            choice_pool = [...setdif(choice_pool, exceptions)]
+            if (choice_pool.length < number_items){
+                throw new Error("Attempted to choose more items than are in the choice pool minus exceptions.")
+            }
+            let picks = new Set()
+            for (let i=0; i<number_items; i++){
+                do{
+                    var x = ROLL(1, choice_pool.length)-1
+                }while (picks.has(choice_pool[x]))
+                picks.add(choice_pool[x])
+            }
+            return (picks.size===1 ? [...picks][0] : picks)
+        }
+        function ProfIn(Mappy, lvl){
+            //Takes a map of profincies, and returns an array of the things they're proficient in.
+            if (lvl === undefined){
+                var lvl = 1 //Just in case you want to use this function for Expertise: pass lvl=2.
+            }
+            return Array.from(Mappy.keys()).filter(k=>Mappy.get(k)>=lvl)
+        }
+        function SetWeapProf(WeapArray){
+            //Sets profinciency in the array of weapons given, regardless of which group they belong to.
+            //Also accepts the names of groups themselves, as long as they are elements in the array.
+            for (let weap of WeapArray){
+                breaktarget:{   //To avoid the throw-statement if a match is found
+                    for (let WeapGroup of [SimpleRanged, SimpleMelee, MartialRanged, MartialMelee]){
+                        if (weap==WeapGroup){
+                            WeapGroup.forEach(function(p,w){WeapGroup.safeset(w,1)})
+                            break breaktarget
+                        }
+                        else if (WeapGroup.has(weap)){
+                            WeapGroup.safeset(weap,1)
+                            break breaktarget
+                        }    
+                    }
+                    throw new Error(`SetWeapProf couldn't find ${weap} in any group of weapons.`)
+                }
+            }
+        }
+        function AddEquip(item,count){
+            //Adds the given item(s) to the character's *Equipment* map.
+            if (Array.isArray(item) && item.length===2){
+                var count = item[1]
+                var item = item[0]
+            }
+            if (AllItems.has(item)){
+                if (count === undefined){
+                    var count = 1
+                }
+                if (Equipment.has(item)){
+                    Equipment.set(item, Equipment.get(item) + count)
+                }
+                else{
+                    Equipment.set(item, count)
+                }
+            }
+            else{ throw new Error(`${item} doesn't appear in AllItems`) }
+        }
+        function IncAbility(key, add){
+            //Increases the character's given ability score by the given amount in the *AbilityScores* map.
+            if (AbilityScores.has(key)){
+                AbilityScores.set(key, AbilityScores.get(key) + add)
+            }
+            else{
+                throw new Error(`AbilityScores has no key: ${key}`)
+            }
+        }
+        //Don't @ me
+        Map.prototype.safeset = function(key,val){
+            if (this.has(key)){
+                this.set(key,val)
+            }
+            else{
+                throw new Error(`${this} \nhas no key: ${key}`)
+            }
+        }
+
+//STARTING CHARACTER GENERATION
+        Sex = CHOOSE(Sexes)
+        Race = CHOOSE(Races)
+        Subrace = CHOOSE(Subraces.get(Race))
+        Class = CHOOSE(Classes)
+        Background = CHOOSE(Backgrounds)
+
+//ABILITY SCORE GENERATION
+        let scores = []
+        if (document.getElementById("RollCheck").checked){
+            for (let i=0; i<6; i++){
+                let rolls = []
+                for (let i=0; i<4; i++){
+                    rolls[i] = ROLL(1,6)
+                }
+                rolls.sort((a,b)=>a-b)
+                scores.push(rolls[1]+rolls[2]+rolls[3])
+            }
+        }
+        else{
+            let score2cost = new Map([[8,0], [9,1], [10,2], [11,3], [12,4], [13,5], [14,7], [15,9]])
+            let pointBank = 27
+            for (let i=0; i<6; i++){
+                score2cost = new Map([...score2cost].filter(e=> e[1]<=pointBank && e[1]+9*(5-i)>=pointBank))
+                let score = CHOOSE(score2cost)
+                if (i==2){
+                    //To avoid leaving 24 points available for the last two picks,
+                    //since they that would force 15 or 17 points to be left for the last pick.
+                    while (pointBank-score2cost.get(score)==24){
+                        score = CHOOSE(score2cost)
+                    }
+                }
+                if (i==3){
+                    //To avoid leaving 15 or 17 points available for the last two picks,
+                    //since they that would force 6 or 8 points to be left for the last pick.
+                    while (pointBank-score2cost.get(score)==15 || pointBank-score2cost.get(score)==17){
+                        score = CHOOSE(score2cost)
+                    }
+                }
+                if (i==4){
+                    //To avoid leaving 6 or 8 points available for the last pick, since they can't be spent.
+                    while (pointBank-score2cost.get(score)==8 || pointBank-score2cost.get(score)==6){
+                        score = CHOOSE(score2cost)
+                    }
+                }
+                scores.push(score)
+                pointBank -= score2cost.get(score)
+            }
+        }
+
+//ABILITY SCORE ALLOCATION
+        if (!document.getElementById("SmartDumb").checked){
+            scores = shuffle(scores)
+            let index = 0
+            AbilityScores.forEach(function(score,ability){
+                IncAbility(ability, scores[index])
+                index++
+            })
+        }
+        else{
+            scores.sort((a,b)=>a-b)
+            if (Class === "Barbarian"){
+                IncAbility("STR", scores[5])
+                IncAbility("CON", scores[4])
+                IncAbility("DEX", scores[3])
+                scores = shuffle(scores.slice(0,3))
+                IncAbility("INT", scores[0])
+                IncAbility("WIS", scores[1])
+                IncAbility("CHA", scores[2])
+            }
+            if (Class === "Bard"){
+                IncAbility("CHA", scores[5])
+                IncAbility("DEX", scores[4])
+                IncAbility("CON", scores[3])
+                scores = shuffle(scores.slice(0,3))
+                IncAbility("STR", scores[0])
+                IncAbility("INT", scores[1])
+                IncAbility("WIS", scores[2])
+            }
+            if (Class === "Cleric"){
+                IncAbility("WIS", scores[5])
+                if (ROLL(1,2)===1){
+                    IncAbility("STR", scores[4])
+                    IncAbility("CON", scores[3])
+                }
+                else{
+                    IncAbility("CON", scores[4])
+                    IncAbility("STR", scores[3])
+                }
+                scores = shuffle(scores.slice(0,3))
+                IncAbility("DEX", scores[0])
+                IncAbility("INT", scores[1])
+                IncAbility("CHA", scores[2])
+            }
+            if (Class === "Druid"){
+                IncAbility("WIS", scores[5])
+                IncAbility("CON", scores[4])
+                scores = shuffle(scores.slice(0,4))
+                IncAbility("STR", scores[0])
+                IncAbility("DEX", scores[1])
+                IncAbility("INT", scores[2])
+                IncAbility("CHA", scores[3])
+            }
+            if (Class === "Fighter"){
+                let roll = ROLL(1,3)
+                if (roll === 1){
+                    IncAbility("STR", scores[5])
+                    IncAbility("CON", scores[4])
+                    IncAbility("DEX", scores[3])
+                }
+                if (roll === 2){
+                    IncAbility("DEX", scores[5])
+                    IncAbility("CON", scores[4])
+                    IncAbility("STR", scores[3])
+                }
+                if (roll === 3){
+                    IncAbility("CON", scores[5])
+                    IncAbility("STR", scores[4])
+                    IncAbility("DEX", scores[3])
+                }
+                scores = shuffle(scores.slice(0,3))
+                IncAbility("INT", scores[0])
+                IncAbility("WIS", scores[1])
+                IncAbility("CHA", scores[2])
+            }
+            if (Class === "Monk"){
+                IncAbility("DEX", scores[5])
+                if (ROLL(1,2)===1){
+                    IncAbility("WIS", scores[4])
+                    IncAbility("CON", scores[3])
+                }
+                else{
+                    IncAbility("CON", scores[4])
+                    IncAbility("WIS", scores[3])
+                }
+                scores = shuffle(scores.slice(0,3))
+                IncAbility("STR", scores[0])
+                IncAbility("INT", scores[1])
+                IncAbility("CHA", scores[2])
+            }
+            if (Class === "Paladin"){
+                IncAbility("STR", scores[5])
+                if (ROLL(1,2)===1){
+                    IncAbility("CHA", scores[4])
+                    IncAbility("CON", scores[3])
+                }
+                else{
+                    IncAbility("CON", scores[4])
+                    IncAbility("CHA", scores[3])
+                }
+                scores = shuffle(scores.slice(0,3))
+                IncAbility("DEX", scores[0])
+                IncAbility("INT", scores[1])
+                IncAbility("WIS", scores[2])
+            }
+            if (Class === "Ranger"){
+                IncAbility("DEX", scores[5])
+                IncAbility("CON", scores[4])
+                IncAbility("WIS", scores[3])
+                scores = shuffle(scores.slice(0,3))
+                IncAbility("INT", scores[0])
+                IncAbility("STR", scores[1])
+                IncAbility("CHA", scores[2])
+            }
+            if (Class === "Rogue"){
+                IncAbility("DEX", scores[5])
+                IncAbility("CON", scores[4])
+                if (ROLL(1,2)===1){
+                    IncAbility("CHA", scores[3])
+                    IncAbility("INT", scores[2])
+                }
+                else{
+                    IncAbility("INT", scores[3])
+                    IncAbility("CHA", scores[2])
+                }
+                scores = shuffle(scores.slice(0,2))
+                IncAbility("STR", scores[0])
+                IncAbility("WIS", scores[1])
+            }
+            if (Class == "Sorcerer"){
+                IncAbility("CHA", scores[5])
+                IncAbility("CON", scores[4])
+                IncAbility("DEX", scores[3])
+                scores = shuffle(scores.slice(0,3))
+                IncAbility("STR", scores[0])
+                IncAbility("INT", scores[1])
+                IncAbility("WIS", scores[2])
+            }
+            if (Class === "Warlock"){
+                IncAbility("CHA", scores[5])
+                IncAbility("CON", scores[4])
+                IncAbility("DEX", scores[3])
+                scores = shuffle(scores.slice(0,3))
+                IncAbility("STR", scores[0])
+                IncAbility("INT", scores[1])
+                IncAbility("WIS", scores[2])
+            }
+            if (Class === "Wizard"){
+                IncAbility("INT", scores[5])
+                IncAbility("CON", scores[4])
+                IncAbility("DEX", scores[3])
+                scores = shuffle(scores.slice(0,3))
+                IncAbility("STR", scores[0])
+                IncAbility("WIS", scores[1])
+                IncAbility("CHA", scores[2])
+            }
+        }
+                            
+//RACES AND SUBRACES
+        if (Race === "Dwarf"){
+            Age = 40 + ROLL(1,250)
+            Name = CHOOSE(Names.get("Dwarf").get(Sex)) + " " + CHOOSE(DwarfNameClan)
+            IncAbility("CON",2)
+            KnownLanguages.add("Dwarvish")
+            SetWeapProf(["Battleaxe", "Handaxe", "Light Hammer", "Warhammer"])
+            SpecialSavingThrows.add(["Dwarven Resilience", "You have advantage on saving thros against poison."])
+            Resistances.safeset("Poison",1) //Dwarven Resilience
+            ArtisanTools.safeset(CHOOSE(["Smith's Tools", "Brewer's Supplies", "Mason's Tools"],1,ProfIn(ArtisanTools)),1)
+            SpecialSkills.add(["Darkvision", "Accustomed to life underground, you have superior vision in dark and dim conditions."
+                                    +" You can see in dim light within 60 feet of you as if it were bright light, and in"
+                                    +" darkness as if it were dim light. You can't discern color in darkness, only shades of gray."])
+            Traits.add(["Heavy Armor Aptitude", "Your speed is not reduced by wearing heavy armor."])
+            SpecialSkills.add(["Stonecunning", "Whenever you make an Intelligence (History) check related to the"
+                                    +" origin of stonework, you are considered proficient in the History skill and add double"
+                                    +" your proficiency bonus to the check, instead of your normal proficiency bonus."])
+            if (Subrace === "Hill"){
+                let temp = ROLL(2,4)
+                Height = 44 + temp
+                Weight = 115 + temp * ROLL(2,6)
+                IncAbility("WIS",1)
+                HP += 1
+                Traits.add(["Dwarven Toughness", "Your hit point maximum increases by 1 per level."])
+            }
+            if (Subrace === "Mountain"){
+                let temp = ROLL(2,4)
+                Height = 48 + temp
+                Weight = 130 + temp * ROLL(2,6)
+                IncAbility("STR",2)
+                ArmorProfs.safeset("Light",1)
+                ArmorProfs.safeset("Medium",1)
+            }
+        }
+        if (Race === "Elf"){
+            Age = 60 + ROLL(1,650)
+            Name = CHOOSE(Names.get("Elf").get(Age>110 ? Sex : "Alt")) + " " + CHOOSE(ElfNameFamily)
+            IncAbility("DEX",2)
+            Speed = 30
+            KnownLanguages.add("Elvish")
+            Skills.safeset("Perception",1)      //Keen Senses
+            SpecialSavingThrows.add(["Fey Ancestry", "You have advantage on saving throws against being charmed, and magic can't put you to sleep"])
+            Traits.add(["Trance", "Elves don't need to sleep. Instead, they meditate deeply, remaining semiconscious, for 4 hours a day."
+                                +" While meditating, you can dream after a fashion; such dreams are actually mental exercise that"
+                                +" have become reflexive through years of practice. After resting in this way, you gain the same"
+                                +" benefit that a human does after 8 hours of sleep."])
+            if (Subrace === "High"){
+                let temp = ROLL(2,10)
+                Height = 54 + temp
+                Weight = 90 + temp * ROLL(1,4)
+                IncAbility("INT",1)
+                if (Math.random() > .3){    KnownLanguages.add(CHOOSE(StandardLanguages,1,KnownLanguages))  }
+                else{                       KnownLanguages.add(CHOOSE(ExoticLanguages,1,KnownLanguages))    }
+                SetWeapProf(["Longsword", "Shortsword", "Shortbow", "Longbow"])
+                SpecialSkills.add(["Darkvision", "Accustomed to life underground, you have superior vision in dark and dim conditions."
+                                        +" You can see in dim light within 60 feet of you as if it were bright light, and in"
+                                        +" darkness as if it were dim light. You can't discern color in darkness, only shades of gray."])
+                //cantrip
+            }
+            if (Subrace === "Wood"){
+                let temp = ROLL(2,10)
+                Height = 54 + temp
+                Weight = 100 + temp * ROLL(1,4)
+                IncAbility("WIS",1)
+                Speed = 35
+                SetWeapProf(["Longsword", "Shortsword", "Shortbow", "Longbow"])
+                SpecialSkills.add(["Darkvision", "Accustomed to life underground, you have superior vision in dark and dim conditions."
+                                        +" You can see in dim light within 60 feet of you as if it were bright light, and in"
+                                        +" darkness as if it were dim light. You can't discern color in darkness, only shades of gray."])
+                SpecialSkills.add(["Mask of the Wild", "You can attempt to hide even when you are only lightly obscured by foliage, heavy rain,"
+                                            +" falling snow, mist, and other natural phenomena."])
+            }
+            if (Subrace === "Dark"){
+                SubraceAltText = " (Drow)"
+                let temp = ROLL(2,6)
+                Height = 53 + temp
+                Weight = 75 + temp * ROLL(1,6)
+                IncAbility("CHA",1)
+                SpecialSkills.add(["Superior Darkvision", "Accustomed to life underground, you have superior vision in dark and"
+                                                +" dim conditions. You can see in dim light within 120 feet of you as if"
+                                                +" it were bright light, and in darkness as if it were dim light. You can't"
+                                                +" discern color in darkness, only shades of gray."])
+                SpecialSkills.add(["Sunlight Sensitivity", "You have disadvantage on attack rolls and Wisdom (Perception) checks"
+                                                    +" that rely on sight when you, the target of your attack, or whatever"
+                                                    +" you are trying to perceive is in direct sunlight."])
+                SetWeapProf(["Rapier", "Shortsword", "Hand Crossbow"])
+                //drow magic
+            }
+        }
+        if (Race === "Halfling"){
+            Age = Math.max(18, ROLL(2,70)-30)   //Weird numbers are for the distribution shape
+            Name = CHOOSE(Names.get("Halfling").get(Sex)) + " " + CHOOSE(HalflingNameFamily)
+            let temp = ROLL(2,4)
+            Height = 31 + temp
+            Weight = 35 + temp
+            IncAbility("DEX",2)
+            Size = "Small"
+            KnownLanguages.add("Halfling")
+            Traits.add(["Lucky", "When you roll a 1 on an attack roll, ability check, or saving throw,"
+                                +" you can reroll the die and must use the new roll."])
+            SpecialSavingThrows.add(["Brave", "You have advantage on saving throws against being frightened."])
+            Traits.add(["Halfling Nimbleness", "You can move through the space of any creature that is of a"
+                                            +" size larger than yours."])
+            if (Subrace === "Lightfoot"){
+                IncAbility("CHA",1)
+                SpecialSkills.add(["Naturally Stealthy", "You can attempt to hide even when you are obscured only by"
+                                                +" a creature that is at least one size larger than you."])
+            }
+            if (Subrace === "Stout"){
+                IncAbility("CON",1)
+                SpecialSavingThrows.add(["Stout Resilience", "You have advantage on saving throws against poison."])
+                Resistances.safeset("Poison",1) //Stout Resilience
+            }
+        }
+        if (Race === "Human"){
+            Age = Math.max(15,ROLL(2,24))   //Weird numbers are for the distribution shape
+            //Name chosen after languages
+            let temp = ROLL(2,10)
+            Height = 56 + temp
+            Weight = 110 + temp * ROLL(2,4)
+            AbilityScores.forEach(function(score,ability){
+                IncAbility(ability,1)
+            })
+            Speed = 30
+            if (Math.random() > .3){    KnownLanguages.add(CHOOSE(StandardLanguages,1,KnownLanguages))  }
+            else{                       KnownLanguages.add(CHOOSE(ExoticLanguages,1,KnownLanguages))    }
+            //Move name picking into errata section to allow possibility of mismatch nonhuman firstname/lastname
+            let NameSources = new Set()
+            for (let language of KnownLanguages){
+                if (language === "Dwarvish"){   NameSources.add("Dwarf")        }
+                if (language === "Elvish")  {   NameSources.add("Elf")          }
+                if (language === "Halfling"){   NameSources.add("Halfling")     }
+                if (language === "Gnomish") {   NameSources.add("Gnome")        }
+            }
+            if (Math.random()>.1 || NameSources.size===0){  Name = CHOOSE(Names.get("Human").get(Sex))                          }
+            else{                                           Name = CHOOSE(Names.get(CHOOSE(NameSources)).get(Sex))              }
+            if (Math.random()>.1 || NameSources.size===0){  Name += " " + CHOOSE(HumanNameFamily)                               }
+            else{                                           Name += " " + CHOOSE(Names.get(CHOOSE(NameSources)).get("Family"))  } 
+        }
+        if (Race === "Dragonborn"){
+            Age = Math.max(10, ROLL(2,45)-20)   //Weird numbers are for the distribution shape
+            Name = CHOOSE(DragonbornNameClan) + " " + CHOOSE(Names.get("Dragonborn").get(Sex))
+            let temp = ROLL(2,8)
+            Height = 66 + temp
+            Weight = 175 + temp * ROLL(2,6)
+            IncAbility("STR",2)
+            IncAbility("CHA",1)
+            Speed = 30
+            KnownLanguages.add("Draconic")
+            if (Subrace === "Black"){
+                Resistances.safeset("Acid",1)
+                Actives.add(["Breath Weapon", "You can use your action to exhale destructive energy. Each creature in a 5 by 30 ft. line must make a"
+                            +" DEX saving throw against a DC of 8 + your CON modifier + your proficiency bonus. If they fail they take 2d6 acid damage,"
+                            +" and if they succeed they take half. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level."
+                            +" You can't use your breath weapon again until you complete a short or long rest."])
+            }
+            if (Subrace === "Blue"){
+                Resistances.safeset("Lightning",1)
+                Actives.add(["Breath Weapon", "You can use your action to exhale destructive energy. Each creature in a 5 by 30 ft. line must make a"
+                            +" DEX saving throw against a DC of 8 + your CON modifier + your proficiency bonus. If they fail they take 2d6 lightning damage,"
+                            +" and if they succeed they take half. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level."
+                            +" You can't use your breath weapon again until you complete a short or long rest."])
+            }
+            if (Subrace === "Brass"){
+                Resistances.safeset("Fire",1)
+                Actives.add(["Breath Weapon", "You can use your action to exhale destructive energy. Each creature in a 5 by 30 ft. line must make a"
+                            +" DEX saving throw against a DC of 8 + your CON modifier + your proficiency bonus. If they fail they take 2d6 fire damage,"
+                            +" and if they succeed they take half. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level."
+                            +" You can't use your breath weapon again until you complete a short or long rest."])
+            }
+            if (Subrace === "Bronze"){
+                Resistances.safeset("Lightning",1)
+                Actives.add(["Breath Weapon", "You can use your action to exhale destructive energy. Each creature in a 5 by 30 ft. line must make a"
+                            +" DEX saving throw against a DC of 8 + your CON modifier + your proficiency bonus. If they fail they take 2d6 lightning damage,"
+                            +" and if they succeed they take half. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level."
+                            +" You can't use your breath weapon again until you complete a short or long rest."])
+            }
+            if (Subrace === "Copper"){
+                Resistances.safeset("Acid",1)
+                Actives.add(["Breath Weapon", "You can use your action to exhale destructive energy. Each creature in a 5 by 30 ft. line must make a"
+                            +" DEX saving throw against a DC of 8 + your CON modifier + your proficiency bonus. If they fail they take 2d6 acid damage,"
+                            +" and if they succeed they take half. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level."
+                            +" You can't use your breath weapon again until you complete a short or long rest."])
+            }
+            if (Subrace === "Gold"){
+                Resistances.safeset("Fire",1)
+                Actives.add(["Breath Weapon", "You can use your action to exhale destructive energy. Each creature in a 15 ft. cone must make a"
+                            +" DEX saving throw against a DC of 8 + your CON modifier + your proficiency bonus. If they fail they take 2d6 fire damage,"
+                            +" and if they succeed they take half. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level."
+                            +" You can't use your breath weapon again until you complete a short or long rest."])
+            }
+            if (Subrace === "Green"){
+                Resistances.safeset("Poison",1)
+                Actives.add(["Breath Weapon", "You can use your action to exhale destructive energy. Each creature in a 15 ft. cone must make a"
+                            +" CON saving throw against a DC of 8 + your CON modifier + your proficiency bonus. If they fail they take 2d6 poison damage,"
+                            +" and if they succeed they take half. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level."
+                            +" You can't use your breath weapon again until you complete a short or long rest."])
+            }
+            if (Subrace === "Red"){
+                Resistances.safeset("Fire",1)
+                Actives.add(["Breath Weapon", "You can use your action to exhale destructive energy. Each creature in a 15 ft. cone must make a"
+                            +" DEX saving throw against a DC of 8 + your CON modifier + your proficiency bonus. If they fail they take 2d6 fire damage,"
+                            +" and if they succeed they take half. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level."
+                            +" You can't use your breath weapon again until you complete a short or long rest."])
+            }
+            if (Subrace === "Silver"){
+                Resistances.safeset("Cold",1)
+                Actives.add(["Breath Weapon", "You can use your action to exhale destructive energy. Each creature in a 15 ft. cone must make a"
+                            +" CON saving throw against a DC of 8 + your CON modifier + your proficiency bonus. If they fail they take 2d6 cold damage,"
+                            +" and if they succeed they take half. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level."
+                            +" You can't use your breath weapon again until you complete a short or long rest."])
+            }
+            if (Subrace === "White"){
+                Resistances.safeset("Cold",1)
+                Actives.add(["Breath Weapon", "You can use your action to exhale destructive energy. Each creature in a 15 ft. cone must make a"
+                            +" CON saving throw against a DC of 8 + your CON modifier + your proficiency bonus. If they fail they take 2d6 cold damage,"
+                            +" and if they succeed they take half. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level."
+                            +" You can't use your breath weapon again until you complete a short or long rest."])
+            }
+        }
+        if (Race === "Gnome"){
+            Age = 25 + ROLL(1,300)
+            Name = CHOOSE(Names.get("Gnome").get(Sex)) + " " + CHOOSE(GnomeNameClan)
+            let temp = ROLL(2,4)
+            Height = 35 + temp
+            Weight = 35 + temp
+            IncAbility("INT",2)
+            Size = "Small"
+            KnownLanguages.add("Gnomish")
+            SpecialSkills.add(["Darkvision", "Accustomed to life underground, you have superior vision in dark and dim conditions."
+                                    +" You can see in dim light within 60 feet of you as if it were bright light, and in"
+                                    +" darkness as if it were dim light. You can't discern color in darkness, only shades of gray."])
+            SpecialSavingThrows.add(["Gnome Cunning", "You have advantage on all Intelligence, Wisdom, and Charisma saving throws against magic."])
+            if (Subrace === "Forest"){
+                IncAbility("DEX",1)
+                //natural illusionist
+                Traits.add(["Speak with Small Beasts", "Through sounds and gestures, you can communicate simple"
+                                                    +" ideas with Small or smaller beasts."])
+            }
+            if (Subrace === "Rock"){
+                IncAbility("CON",1)
+                SpecialSkills.add(["Artificer's Lore", "Whenever you make an Intelligence (History) check related to magic items,"
+                                            +" alchemical objects, or technological devices, you can add twice you proficiency"
+                                            +" bonus, instead of any proficiency bonus you normally apply."])
+                //tinker
+            }
+        }
+        if (Race === "Half-Elf"){
+            Age = Math.max(18, ROLL(2,70)-30)   //Weird numbers are for the distribution shape
+            Name = CHOOSE(Names.get(CHOOSE(["Human", "Elf"])).get(Sex)) + " " + CHOOSE(Names.get(CHOOSE(["Human", "Elf"])).get("Family"))
+            let temp = ROLL(2,8)
+            Height = 57 + temp
+            Weight = 110 + temp * ROLL(2,4)
+            IncAbility("CHA",2)
+            CHOOSE(AbilityScores,2,["CHA"]).forEach(function(ability){
+                IncAbility(ability,1)
+            })
+            Speed = 30
+            KnownLanguages.add("Elvish")
+            if (Math.random() > .3){    KnownLanguages.add(CHOOSE(StandardLanguages,1,KnownLanguages))  }
+            else{                       KnownLanguages.add(CHOOSE(ExoticLanguages,1,KnownLanguages))    }
+            SpecialSkills.add(["Darkvision", "Accustomed to life underground, you have superior vision in dark and dim conditions."
+                                    +" You can see in dim light within 60 feet of you as if it were bright light, and in"
+                                    +" darkness as if it were dim light. You can't discern color in darkness, only shades of gray."])
+            SpecialSavingThrows.add(["Fey Ancestry", "You have advantage on saving throws against being charmed, and magic can't put you to sleep"])
+            //Skill Versatility is done at the end to avoid collisions. See Errata section.
+        }
+        if (Race === "Half-Orc"){
+            Age = Math.max(10, ROLL(2,35)-20)   //Weird numbers are for the distibution shape
+            if (Math.random()>.2){  Name = CHOOSE(Names.get("Half-Orc").get(Sex))   }
+            else{                   Name = CHOOSE(Names.get("Human").get(Sex))      }
+            if (Math.random()>.1){ }
+            else{                   Name += " " + CHOOSE(HumanNameFamily)           }
+            let temp = ROLL(2,10)
+            Height = 58 + temp
+            Weight = 140 + temp * ROLL(2,6)
+            IncAbility("STR",2)
+            IncAbility("CON",1)
+            Speed = 30
+            KnownLanguages.add("Orc")
+            Skills.safeset("Intimidation",1)    //Menacing
+            SpecialSkills.add(["Darkvision", "Accustomed to life underground, you have superior vision in dark and dim conditions."
+                                    +" You can see in dim light within 60 feet of you as if it were bright light, and in"
+                                    +" darkness as if it were dim light. You can't discern color in darkness, only shades of gray."])
+            Traits.add(["Relentless Endurance", "When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit"
+                                            +" point instead. You can't use this feature again until you finish a long rest."])
+            Traits.add(["Savage Attacks", "When you score a critical hit with a melee weapon attack, you can roll one of the weapon's"
+                                        +" damage dice one additional time and add it to the extra damage of a critical hit."])
+        }
+        if (Race === "Tiefling"){
+            Age = Math.max(15, ROLL(2,24))  //Weird numbers are for the distribution shape
+            if (Math.random()>.3){
+                if (Math.random()>.5){  Name = CHOOSE(Names.get("Tiefling").get(Sex)) + (Math.random()>.65 ? "" : " " + CHOOSE(HumanNameFamily))    }
+                else{                   Name = CHOOSE(Names.get("Human").get(Sex)) + (Math.random()>.2 ? "" : " " + CHOOSE(HumanNameFamily))        }
+            }
+            else{                       Name = CHOOSE(TieflingNameVirtue)                                                                       }
+            let temp = ROLL(2,8)
+            Height = 57 + temp
+            Weight = 110 + temp * ROLL(2,4)
+            IncAbility("INT",1)
+            IncAbility("CHA",2)
+            Speed = 30
+            SpecialSkills.add(["Darkvision", "Accustomed to life underground, you have superior vision in dark and dim conditions."
+                                    +" You can see in dim light within 60 feet of you as if it were bright light, and in"
+                                    +" darkness as if it were dim light. You can't discern color in darkness, only shades of gray."])
+            KnownLanguages.add("Infernal")
+            //hellish resistance
+            //infernal legacy
+        }
+      
+//ABILITY MODIFIERS
+        AbilityMods.forEach(function(mod,ability){
+            AbilityMods.set(ability, Math.floor((AbilityScores.get(ability)-10)/2))
+        })
+
+//CLASSES
+        if (Class === "Barbarian"){
+            Hitdice = 12
+            ArmorProfs.safeset("Light",1)
+            ArmorProfs.safeset("Medium",1)
+            ArmorProfs.safeset("Shield",1)
+            SavingThrows.safeset("STR",1)
+            SavingThrows.safeset("CON",1)
+            SetWeapProf([SimpleMelee, SimpleRanged, MartialMelee, MartialRanged])
+            CHOOSE(["Animal Handling", "Athletics", "Intimidation", "Nature", "Perception", "Survival"], 2, ProfIn(Skills)).forEach(function(skill){
+                Skills.safeset(skill,1)
+            })
+            AddEquip(CHOOSE([CHOOSE(MartialMelee,1,["Greataxe"]),"Greataxe"]))
+            AddEquip(CHOOSE([["Handaxe",2], CHOOSE(new Map([...SimpleMelee, ...SimpleRanged]),1,"Handaxe")]))
+            AddEquip("Javelin", 4)
+            //explorers pack
+        }
+        if (Class === "Bard"){
+            Hitdice = 8
+            ArmorProfs.safeset("Light",1)
+            SavingThrows.safeset("DEX",1)
+            SavingThrows.safeset("CHA",1)
+            SetWeapProf([SimpleMelee, SimpleRanged, "Hand Crossbow", "Longsword", "Rapier", "Shortsword"])
+            CHOOSE(Skills,3,ProfIn(Skills)).forEach(function(skill){
+                Skills.safeset(skill,1)
+            })
+            CHOOSE(Instruments,3,ProfIn(Instruments)).forEach(function(instrument){
+                Instruments.safeset(instrument,1)
+            })
+            AddEquip(CHOOSE(["Rapier", "Longsword", CHOOSE(new Map([...SimpleMelee, ...SimpleRanged]))]))
+            //diplomats or entertainers pack
+            AddEquip(CHOOSE(ProfIn(Instruments)))
+            AddEquip("Leather Armor")
+            AddEquip("Dagger")
+            //choose 2 bard cantrips
+            //choose 4 1st-level spells from the bard list
+            //ritual casting
+            Actives.add(["Bardic Inspiration", "You can use a bonus action on your turn to choose one creature other than yourself within"
+                            +" 60 ft. of you who can hear you. That creature gains one Bardic Inspiration die, a d6. Once within 10 min., the creature can"
+                            +" roll the die and add the number rolled to one ability check, attack roll, or saving throw. The creature can wait until after"
+                            +" it rolls the d20 before deciding to use the Bardic Inspiration die, but must decide before the DM says whether the roll"
+                            +" succeeds or fails. Once the Bardic Inspiration die is rolled, it is lost. A creature can have only one Bardic Inspiration die at a time."])
+        }
+        if (Class === "Cleric"){
+            Hitdice = 8
+            ArmorProfs.safeset("Light",1)
+            ArmorProfs.safeset("Medium",1)
+            ArmorProfs.safeset("Shield",1)
+            SavingThrows.safeset("WIS",1)
+            SavingThrows.safeset("CHA",1)
+            SetWeapProf([SimpleMelee, SimpleRanged])
+            Subclass = CHOOSE(["Knowledge", "Life", "Light", "Nature", "Tempest", "Trickery", "War"])
+            if (Subclass === "Knowledge"){
+                //command
+                //identify
+                CHOOSE(setunion(StandardLanguages, ExoticLanguages), 2, KnownLanguages).forEach(function(lang){
+                    KnownLanguages.add(lang)
+                })
+                CHOOSE(["Arcana", "History", "Nature", "Religion"],2,ProfIn(Skills)).forEach(function(skill){
+                    Skills.safeset(skill, 2)
+                })
+            }
+            if (Subclass === "Life"){
+                //bless
+                //cure wounds
+                ArmorProfs.safeset("Heavy",1)
+                Traits.add(["Disciple of Life", "Whenever you use a spell of 1st level or higher to restore hit points to a creature,"
+                                                +" the creature regains additional hit points equal to 2 + the spell's level."])
+            }
+            if (Subclass === "Light"){
+                //burning hands
+                //faerie fire
+                //light cantrip
+                Actives.add(["Warding Flare", "You can interpose divine light between yourself and an attacking enemy. When you are attacked by"
+                                            +" a creature within 30 ft. of you that you can see, you can use your reaction to impose disadvantage"
+                                            +" on the attack roll, causing light to flare before the attacker before it hits or misses. An attacker"
+                                            +" that can't be blinded is immune to this feature. You can use this feature a number of times equal to"
+                                            +" your Wisdom modifier (a minimum of once). You regain all expended uses when you finish a long rest."])
+            }
+            if (Subclass === "Nature"){
+                //animal friendship
+                //speak with animals
+                //choose druid cantrip
+                Skills.safeset(CHOOSE(["Animal Handling", "Nature", "Survival"],1,ProfIn(Skills)))
+                ArmorProfs.safeset("Heavy",1)
+            }
+            if (Subclass === "Tempest"){
+                //fog cloud
+                //thumderwave
+                SetWeapProf([MartialMelee, MartialRanged])
+                ArmorProfs.safeset("Heavy",1)
+                Actives.add(["Wrath of the Storm", "You can thunderously rebuke attackers. When a creature within 5 ft. of you that you can see hits you with"
+                                                +" an attack, you can use your reaction to cause the creature to make a Dexterity saving throw. The creature takes"
+                                                +" 2d8 lightning or thunder damage (your choice) on a failed saving throw, and half as much damage on a successful one."
+                                                +" You can use this feature a number of times equal to your Wisdom modifier (a minimum of once). You regain all expended"
+                                                +" uses when you finish a long rest."])
+            }
+            if (Subclass === "Trickery"){
+                //charm person
+                //disguise self
+                Actives.add(["Blessing of the Trickster", "You can use your action to touch a willing creature other than yourself to give it advantage on Dexterity(Stealth)"
+                                                +" checks. This blessing lasts 1 hour or until you use this feature again."])
+            }
+            if (Subclass === "War"){
+                //divine favor
+                //shield of faith
+                SetWeapProf([MartialMelee, MartialRanged])
+                ArmorProfs.safeset("Heavy",1)
+                Actives.add(["War Priest", "Your god delivers bolts of inspiration to you while you are engaged in battle. When you"
+                                        +" use the Attack action, you can make one weapon attack as a bonus action. You can use this"
+                                        +" feature a number of times equal to your Wisdom modifier (a minimum of once). You regain"
+                                        +" all expended uses when you finish a long rest."])
+            }
+            CHOOSE(["History", "Insight", "Medicine", "Persuasion", "Religion"],2,ProfIn(Skills)).forEach(function(skill){
+                Skills.safeset(skill,1)
+            })
+            //equipment
+        }
+        if (Class === "Druid"){
+            Hitdice = 8
+            ArmorProfs.safeset("Light",1)
+            ArmorProfs.safeset("Medium",1)
+            ArmorProfs.safeset("Shield",1)
+            SavingThrows.safeset("INT",1)
+            SavingThrows.safeset("WIS",1)
+            SetWeapProf(["Club", "Dagger", "Dart", "Javelin", "Mace", "Quarterstaff", "Scimitar", "Sickle", "Sling", "Spear"])
+            CHOOSE(["Arcana", "Animal Handling", "Insight", "Medicine", "Nature", "Perception", "Religion", "Survival"],2,ProfIn(Skills)).forEach(function(skill){
+                Skills.safeset(skill,1)
+            })
+            KnownLanguages.add("Druidic")
+            //choose 2 cantrips from the druid list
+        }
+        if (Class === "Fighter"){
+            Hitdice = 10
+            ArmorProfs.safeset("Light",1)
+            ArmorProfs.safeset("Medium",1)
+            ArmorProfs.safeset("Heavy",1)
+            ArmorProfs.safeset("Shield",1)
+            SavingThrows.safeset("STR",1)
+            SavingThrows.safeset("CON",1)
+            SetWeapProf([SimpleMelee, SimpleRanged, MartialMelee, MartialRanged])
+            CHOOSE(["Acrobatics", "Animal Handling", "Athletics", "History", "Insight", "Intimidation", "Perception", "Survival"],2,ProfIn(Skills)).forEach(function(skill){
+                Skills.safeset(skill,1)
+            })
+            //Fighting Styles and Weapon Options
+            //Archery
+              //At least 1 ranged
+            //Defense
+              //Any
+            //Dueling
+              //at least one melee one handed
+            //Great Weapon Fighting
+              //at least one versitile/two handed
+            //Protection
+              //Shield
+            //Two-Weapon Fighting
+              //At least two light weapons
+        }
+        if (Class === "Monk"){
+            Hitdice = 8
+            SavingThrows.safeset("STR",1)
+            SavingThrows.safeset("DEX",1)
+            SetWeapProf([SimpleMelee, SimpleRanged, "Shortsword"])
+            CHOOSE(["Acrobatics", "Athletics", "History", "Insight", "Religion", "Stealth"],2,ProfIn(Skills)).forEach(function(skill){
+                Skills.safeset(skill,1)
+            })
+        }
+        if (Class === "Paladin"){
+            Hitdice = 10
+            ArmorProfs.safeset("Light",1)
+            ArmorProfs.safeset("Medium",1)
+            ArmorProfs.safeset("Heavy",1)
+            ArmorProfs.safeset("Shield",1)
+            SavingThrows.safeset("WIS",1)
+            SavingThrows.safeset("CHA",1)
+            SetWeapProf([SimpleMelee, SimpleRanged, MartialMelee, MartialRanged])
+            CHOOSE(["Athletics", "Insight", "Intimidation", "Medicine", "Persuasion", "Religion"],2,ProfIn(Skills)).forEach(function(skill){
+                Skills.safeset(skill,1)
+            })
+        }
+        if (Class === "Ranger"){
+            Hitdice = 10
+            ArmorProfs.safeset("Light",1)
+            ArmorProfs.safeset("Medium",1)
+            ArmorProfs.safeset("Shield",1)
+            SavingThrows.safeset("STR",1)
+            SavingThrows.safeset("DEX",1)
+            SetWeapProf([SimpleMelee, SimpleRanged, MartialMelee, MartialRanged])
+            CHOOSE(["Animal Handling", "Athletics", "Insight", "Investigation", "Nature", "Perception", "Stealth", "Survival"],3,ProfIn(Skills)).forEach(function(skill){
+                Skills.safeset(skill,1)
+            })
+        }
+        if (Class === "Rogue"){
+            Hitdice = 8
+            ArmorProfs.safeset("Light",1)
+            SavingThrows.safeset("DEX",1)
+            SavingThrows.safeset("INT",1)
+            SetWeapProf([SimpleMelee, SimpleRanged, "Hand Crossbow", "Longsword", "Rapier", "Shortsword"])
+            CHOOSE(["Acrobatics", "Athletics", "Deception", "Insight", "Intimidation", "Investigation", "Perception", "Performance", "Persuasion", "Sleight of Hand", "Stealth"],4,ProfIn(Skills)).forEach(function(skill){
+                Skills.safeset(skill,1)
+            })
+            KnownLanguages.add("Thieves' Cant")
+        }
+        if (Class === "Sorcerer"){
+            Hitdice = 6
+            SavingThrows.safeset("CON",1)
+            SavingThrows.safeset("CHA",1)
+            SetWeapProf(["Dagger", "Dart", "Sling", "Quarterstaff", "Light Crossbow"])
+            CHOOSE(["Arcana", "Deception", "Insight", "Intimidation", "Persuasion", "Religion"],2,ProfIn(Skills)).forEach(function(skill){
+                Skills.safeset(skill,1)
+            })
+        }
+        if (Class === "Warlock"){
+            Hitdice = 8
+            ArmorProfs.safeset("Light",1)
+            SavingThrows.safeset("WIS",1)
+            SavingThrows.safeset("CHA",1)
+            SetWeapProf([SimpleMelee, SimpleRanged])
+            CHOOSE(["Arcana", "Deception", "History", "Intimidation", "Investigation", "Nature", "Religion"],2,ProfIn(Skills)).forEach(function(skill){
+                Skills.safeset(skill,1)
+            })
+
+        }
+        if (Class === "Wizard"){
+            Hitdice = 6
+            SavingThrows.safeset("INT",1)
+            SavingThrows.safeset("WIS",1)
+            SetWeapProf(["Dagger", "Dart", "Sling", "Quarterstaff", "Light Crossbow"])
+            CHOOSE(["Arcana", "History", "Insight", "Investigation", "Medicine", "Religion"],2,ProfIn(Skills)).forEach(function(skill){
+                Skills.safeset(skill,1)
+            })
+        }
+   
+          
+//BACKGROUNDS
+        if (Background === "Acolyte"){
+            Skills.safeset("Insight",1)
+            Skills.safeset("Religion",1)
+            for (let i=0; i<2; i++){
+              if (Math.random()>.3){    KnownLanguages.add(CHOOSE(StandardLanguages,1,KnownLanguages))  }
+              else{                     KnownLanguages.add(CHOOSE(ExoticLanguages,1,KnownLanguages))    }
+            }
+            GP += 15
+            AddEquip("Book, Prayer")
+            AddEquip("Incense, Stick", 5)
+            AddEquip("Pouch")
+            AddEquip("Vestments")
+            AddEquip("Clothes, Common")
+            AddEquip(CHOOSE(FocusHolySymbol))
+            BackgroundFeatures.add(["Shelter of the Faithful", "As an acolyte, you command the respect of those who share your faith, and you can perform"
+                                                +" the religious ceremonies of your deity. You and your adventuring companions can expect to receive"
+                                                +" free healing and care at a temple, shrine, or other established presence of your faith, though you"
+                                                +" must provide any material components needed for spells. Those who share your religion will support"
+                                                +" you (but only you) at a modest lifestyle. While near your temple, you can call upon the priests for"
+                                                +" assistance, provided the assisstance you ask for is not hazardous and you remain in good standing with your temple."])
+        }
+        if (Background === "Charlatan"){
+            Skills.safeset("Deception",1)
+            Skills.safeset("Sleight of Hand",1)
+            for (let tool of ["Disguise Kit", "Forgery Kit"]){
+                OtherTools.safeset(tool,1)
+            }
+            GP += 15
+            AddEquip("Clothes, Fine")
+            AddEquip("Disguise Kit")
+            AddEquip("Pouch")
+            AddEquip(...CHOOSE([["Bottle Of Colored Liquid", 10], ["Weighted Dice", 1], ["Marked Cards", 1], ["Fake Duke's Signet Ring", 1]]))
+            BackgroundFeatures.add(["False Identity", "You have created a second identity that includes documentation, established acquaintances, and disguises"
+                                                    +" that allow you to assume that persona. Additionally, you can forge documents including official papers"
+                                                    +" and personal letters, as long as you have seen an example if the kind of document or the handwriting you are trying to copy."])
+        }
+        if (Background === "Criminal"){
+            Skills.safeset("Deception",1)
+            Skills.safeset("Stealth",1)
+            GamingSets.safeset(CHOOSE(GamingSets,1,ProfIn(GamingSets)),1)
+            OtherTools.safeset("Thieves' Tools",1)
+            GP += 15
+            AddEquip("Crowbar")
+            AddEquip("Clothes, Common")
+            AddEquip("Pouch")
+            BackgroundFeatures.add(["Criminal Contract", "You have a reliable and trustworthy contact who acts as your liaison to a network of other criminals. You know how to get"
+                                                        +" messages to and from your contact, even over great distances; specifically, you know the local messengers, corrupt caravan"
+                                                        +" masters, and seedy sailors who can deliver messages for you."])
+        }
+        if (Background === "Entertainer"){
+            Skills.safeset("Acrobatics",1)
+            Skills.safeset("Performance",1)
+            OtherTools.safeset("Disguise Kit",1)
+            Instruments.safeset(CHOOSE(Instruments,1,ProfIn(Instruments)),1)
+            GP += 15
+            AddEquip("Pouch")
+            AddEquip("Clothes, Costume")
+            AddEquip(...CHOOSE([["Love Letter",1], ["Lock Of Hair",1], ["Trinket",1]]))
+            AddEquip(CHOOSE(ProfIn(Instruments)))
+            BackgroundFeatures.add(["By Popular Demand", "You can always find a place to perform, usually in an inn or tavern but possibly with a circus, at a theater, or even in a"
+                                                        +" noble's court. At such a place, you receive free lodging and food of a modest or comfortable standard (depending on the"
+                                                        +" quality of the establishment), as long as you perform each night. In addition, your performance makes you something of a"
+                                                        +" local figure. When strangers recognize you in a town where you have performed, they typically take a liking to you."])
+        }
+        if (Background === "Folk Hero"){
+            Skills.safeset("Animal Handling",1)
+            Skills.safeset("Survival",1)
+            ArtisanTools.safeset(CHOOSE(ArtisanTools,1,ProfIn(ArtisanTools)),1)
+            Vehicles.safeset("Land",1)
+            GP += 10
+            AddEquip("Pouch")
+            AddEquip("Shovel")
+            AddEquip("Pot, Iron")
+            AddEquip("Clothes, Common")
+            AddEquip(CHOOSE(ProfIn(ArtisanTools)))
+            BackgroundFeatures.add(["Rustic Hospitality", "Since you come from the ranks of the common folk, you fit in among them with ease. You can find a place to hide, rest,"
+                                                        +" or recuperate among other commoners, unless you have shown yourself to be a danger to them. they will shield you from"
+                                                        +" the law or anyone else searching for you, though they will not risk their lives for you."])
+        }
+        if (Background === "Guild Artisan"){
+            Skills.safeset("Insight",1)
+            Skills.safeset("Persuasion",1)
+            if (Math.random()>.3){      KnownLanguages.add(CHOOSE(StandardLanguages,1,KnownLanguages))  }
+            else{                       KnownLanguages.add(CHOOSE(ExoticLanguages,1,KnownLanguages))    }
+            ArtisanTools.safeset(CHOOSE(ArtisanTools,1,ProfIn(ArtisanTools)),1)
+            GP += 15
+            AddEquip("Pouch")
+            AddEquip("Clothes, Traveler")
+            AddEquip("Guild Letter Of Introduction")
+            AddEquip(CHOOSE(ProfIn(ArtisanTools)))
+            BackgroundFeatures.add(["Guild Membership", "As an established and respected member of a guild, you can rely on certain benefits that membership provides. Your fellow"
+                                                        +" guild members will provide you with lodging and food if necessary, and pay for your funeral if needed. In some cities"
+                                                        +" and towns, a guildhall offers a central place to meet other members of your profession, which can be a good place to meet"
+                                                        +" potential patrons, allies, or hirelings. Guilds often wield tremendous political power. If you are accused of a crime, your"
+                                                        +" guild will support you if a good case can be made for your innocence or the crime is justifiable. You can also gain access"
+                                                        +" to powerful political figures through the guild, if you are a member in good standing. Such connections might require the"
+                                                        +" donation of money or magic items to the guild's coffers. You must pay dues of 5 gp per month to the guild. If you miss"
+                                                        +" payments, you must make up back dues to remain in the guild's good graces."])
+            
+        }
+        if (Background === "Hermit"){
+            Skills.safeset("Medicine",1)
+            Skills.safeset("Religion",1)
+            if (Math.random()>.3){      KnownLanguages.add(CHOOSE(StandardLanguages,1,KnownLanguages))  }
+            else{                       KnownLanguages.add(CHOOSE(ExoticLanguages,1,KnownLanguages))    }
+            OtherTools.safeset("Herbalism Kit",1)
+            GP += 5
+            AddEquip("Pouch")
+            AddEquip("Case, Map Or Scroll")
+            AddEquip("Blanket")
+            AddEquip("Clothes, Common")
+            AddEquip("Herbalism Kit")
+            BackgroundFeatures.add(["Discovery", "The quiet seclusion of your extended hermitage gave you access to a unique and powerful discovery. It might be a great truth about the"
+                                                +" cosmos, the deities, the powerful beings of the outer planes, or the forces of nature. It could be a site that no one else has ever seen."
+                                                +" You might have uncovered a fact that has long been forgotten, or unearthed some relic of the past that could rewrite history. It might"
+                                                +" be information that would be damaging to the people who consigned you to exile, and hence the reason for your return to society."])
+        }
+        if (Background === "Noble"){
+            Skills.safeset("History",1)
+            Skills.safeset("Persuasion",1)
+            if (Math.random()>.3){      KnownLanguages.add(CHOOSE(StandardLanguages,1,KnownLanguages))  }
+            else{                       KnownLanguages.add(CHOOSE(ExoticLanguages,1,KnownLanguages))    }
+            GamingSets.safeset(CHOOSE(GamingSets,1,ProfIn(GamingSets)),1)
+            GP += 25
+            AddEquip("Purse")
+            AddEquip("Scroll Of Pedigree")
+            AddEquip("Clothes, Fine")
+            AddEquip("Signet Ring")
+            BackgroundFeatures.add(["Position of Privilege", "Thanks to your noble birth, people are inclined to thnk the best of you. You are welcome in high society, and people assume you"
+                                                        +" have the right to be wherever you are. The common folk make every effort to accomodate you and avoid your displeasure, and other people"
+                                                        +" of high birth treat you as a member of the same social sphere. You can secure an audience with a local noble if you need to."])
+        }
+        if (Background === "Outlander"){
+            Skills.safeset("Athletics",1)
+            Skills.safeset("Survival",1)
+            if (Math.random()>.3){      KnownLanguages.add(CHOOSE(StandardLanguages,1,KnownLanguages))  }
+            else{                       KnownLanguages.add(CHOOSE(ExoticLanguages,1,KnownLanguages))    }
+            Instruments.safeset(CHOOSE(Instruments,1,ProfIn(Instruments)),1)
+            GP += 10
+            AddEquip("Pouch")
+            AddEquip("Staff")
+            AddEquip("Hunting Trap")
+            AddEquip("Trophy, Animal")
+            AddEquip("Clothes, Traveler")
+            BackgroundFeatures.add(["Wanderer", "You have an excellent memory for maps and geography, and you can always recall the general layout of terrain, settlements, and other features around you."
+                                                +" In addition, you can find food and fresh water for yourself and up to five other people each day, provided that the land offers berries, small game,"
+                                                +" water, and so forth."])
+        }
+        if (Background === "Sage"){
+            Skills.safeset("Arcana",1)
+            Skills.safeset("History",1)
+            for (let i=0; i<2; i++){
+              if (Math.random()>.3){    KnownLanguages.add(CHOOSE(StandardLanguages,1,KnownLanguages))  }
+              else{                     KnownLanguages.add(CHOOSE(ExoticLanguages,1,KnownLanguages))    }
+            }
+            GP += 10
+            AddEquip("Pouch")
+            AddEquip("Ink (1 Ounce Bottle)")
+            AddEquip("Ink Pen")
+            AddEquip("Clothes, Common")
+            AddEquip("Letter From A Dead Colleague Posing A Question You Have Not Yet Been Able To Answer")
+            BackgroundFeatures.add(["Researcher", "When you attempt to learn or recall a piece of lore, if you do not know that information, you often know where and from whom you can obtain it."
+                                                +" Usually, this information comes from a library, scriptorium, university, or a sage or other learned person or creature. The knowledge you seek might"
+                                                +" be secreted away in an almost inaccessible place, or that it simply cannot be found. Unearthing the deepest secrets of the multiverse can require an"
+                                                +" adventure or even a whole campaign."])
+        }
+        if (Background === "Sailor"){
+            Skills.safeset("Athletics")
+            Skills.safeset("Perception")
+            OtherTools.safeset("Navigator's Tools")
+            Vehicles.safeset("Water")
+            GP += 10
+            AddEquip("Pouch")
+            AddEquip("Club")
+            AddEquip("Rope, Silk (50 Feet)")
+            AddEquip("Clothes, Common")
+            AddEquip("Trinket")
+            BackgroundFeatures.add(["Ship's Passage", "When you need to, you can secure free passage on a sailing ship for yourself and your other companions. You might sail on the ship you served on, or another ship you"
+                                                    +" have good relations with (perhaps one captained by a former crewmate). Because you're calling in a favor, you can't be certain of a schedule or route that will meet"
+                                                    +" your every need. In return for your free passage, you and your companions are expected to assist with the crew during the passage."])
+        }
+        if (Background === "Soldier"){
+            Skills.safeset("Athletics",1)
+            Skills.safeset("Intimidation",1)
+            GamingSets.safeset(CHOOSE(GamingSets,1,ProfIn(GamingSets)),1)
+            Vehicles.safeset("Land",1)
+            GP += 10
+            AddEquip("Pouch")
+            AddEquip("Insignia Of Rank")
+            AddEquip("Trophy, Enemy")
+            AddEquip("Clothes, Common")
+            AddEquip(CHOOSE(["Dice Set", "Playing Card Set"]))
+            BackgroundFeatures.add(["Military Rank", "You have a military rank from your career as a soldier. Soldiers loyal to your former military organization still recognize your authority and influence, and they defer"
+                                                    +" to you if they are of a lower rank. You can invoke your rank to exert influence over other soldiers and requisition simple equipment or horses for temporary use. You"
+                                                    +" can also usually gain access to friendly military encampments and fortresses where your rank is recognized."])
+        }
+        if (Background === "Urchin"){
+            Skills.safeset("Sleight of Hand",1)
+            Skills.safeset("Stealth",1)
+            for (let tool of ["Disguise Kit", "Thieves' Tools"]){
+                OtherTools.safeset(tool,1)
+            }
+            GP += 15
+            AddEquip("Pouch")
+            AddEquip("Knife, Small")
+            AddEquip("Map, Home City")
+            AddEquip("Pet, Mouse")
+            AddEquip("Trinket")
+            AddEquip("Clothes, Common")
+            BackgroundFeatures.add(["City Secrets", "You know the secret patterns and flow to cities and can find passages through the urban sprawl that others would miss. When you are not in combat, you (and companions you lead)"
+                                                    +" can travel between any two locations in the city twice as fast as your speed would normally allow."])
+        }
+
+//ERRATA
+        if (Race === "Half-Elf"){
+            CHOOSE(Skills,2,ProfIn(Skills)).forEach(function(skill){    //Skill Versatility done last to avoid collisions.
+                Skills.safeset(skill,1)
+            })
+        }
+          
+//HP
+        HP += Hitdice + AbilityMods.get("CON")
+      
+
+
+//WRITING TO HTML DOC
+        document.getElementById("Name").innerHTML = Name
+        document.getElementById("Race").innerHTML = ((Subrace==="")? "" : Subrace+" ") + Race + SubraceAltText
+        document.getElementById("Class").innerHTML = ((Subclass==="")? "" : Subclass+" ") + Class
+        document.getElementById("Background").innerHTML = Background
+        AbilityScores.forEach(function(score,ability){
+            document.getElementById(ability).innerHTML = AbilityScores.get(ability)
+            document.getElementById(ability+"m").innerHTML = (AbilityMods.get(ability)>=0 ? "+": "") + AbilityMods.get(ability)
+        })
+        Skills.forEach(function(prof,skill){
+            document.getElementById(skill).innerHTML = (prof===0 ? "" : (prof===1 ? "P" : "E"))
+            let mod = 2*prof+AbilityMods.get(Skill2Ability.get(skill))
+            document.getElementById(skill+"F").innerHTML = (mod<0 ? "" : "+") + mod
+        })
+        document.getElementById("Height").innerHTML = Math.floor(Height/12) + "\'" + Height%12 + "\""
+        document.getElementById("Weight").innerHTML = Weight + " lbs"
+        document.getElementById("HP").innerHTML = HP
+        document.getElementById("Hitdice").innerHTML = "d" + Hitdice
+        document.getElementById("Speed").innerHTML = Speed
+        document.getElementById("Init").innerHTML = AbilityMods.get("DEX")
+        document.getElementById("Sex").innerHTML = Sex
+        document.getElementById("Age").innerHTML = Age
+        document.getElementById("Name").innerHTML = Name
+        let languageList = document.getElementById("Languages")
+        languageList.innerHTML = null
+        ;[...KnownLanguages].forEach(function(language){
+            let item = document.createElement('li')
+            item.appendChild(document.createTextNode(language))
+            languageList.appendChild(item)
+        })
+            //armor prof
+            //weapon prof
+            //tool prof
+            //saving throws
+            //resistances
+            //equipment
+            //traits
+            //actives
+        //console.dir(window)
+} catch(err){ console.dir(err, window) }
+}
+</script><script>RollCharacter()</script>
+</body>
+</html>
